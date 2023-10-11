@@ -10,7 +10,7 @@
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
     "start:backend": "cd backend && npm run start",
     "start:frontend": "cd frontend && ng serve",
-    "deploy": "cd frontend && ng deploy frontend --base-href=/nwt_project/"
+    "deploy": "cd frontend && ng deploy"
   },
   "keywords": [],
   "author": "",
