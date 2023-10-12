@@ -1,12 +1,10 @@
 # nwt_project
 A web application for a New Web Technologies course, implementing a CRUD API using NestJS and a frontend in Angular
 
-How to init install and start the project :
-
-npm install
-npm run installs
-npm run start
-
-How to deploy (front only for the moment) :
-
-npm run deploy
+Install the project : 
+`cd backend ; npm install ; cd .. ; cd frontend ; npm install`
+Start the project :
+`cd backend ; npm run start`
+`cd frontend ; ng serve`
+Deploy the project :
+`cd frontend ; ng deploy`
