@@ -1,0 +1,76 @@
+import { Observable, of, throwError } from "rxjs";
+import { User } from "./schemas/user.schema";
+import { 
+    Injectable,
+    NotFoundException,
+UnprocessableEntityException,
+ } from "@nestjs/common";
+import { UserEntity } from "./entities/user.entity";
+import { UserDao } from "./dao/user.dao";
+import {
+    catchError,
+    defaultIfEmpty,
+    filter,
+    map,
+    mergeMap,
+  } from 'rxjs/operators';
+import { USER } from "src/data/user";
+import { stdout } from "process";
+import { Console } from "console";
+
+@Injectable()
+export class UserService {
+  // private property to store all user
+  private _user: User[];
+
+  /**
+   * Class constructor
+   *
+   * @param {UserDao} _userDao instance of the DAO
+   */
+  constructor(private readonly _userDao: UserDao) {
+    this._user = [].concat(USER).map((user) => ({
+      ...user}))
+
+    console.log(this._user);
+    
+  }
+  
+
+  /**
+   * Returns all existing user in the list
+   *
+   * @returns {Observable<UserEntity[] | void>}
+   */
+  findAll = (): Observable<UserEntity[] | void> =>
+    this._userDao.find().pipe(
+      filter(Boolean),
+      map((user) => (user || []).map((user) => new UserEntity(user))),
+      defaultIfEmpty(undefined),
+    );
+
+
+    /**
+   * Returns one user of the list matching id in parameter
+   *
+   * @param {string} id of the user
+   *
+   * @returns {Observable<UserEntity>}
+   */
+    findOne = (id: string): Observable<UserEntity> =>
+    this._userDao.findById(id).pipe(
+      mergeMap((user) => {
+        if (!!user) {
+          return of(new UserEntity(user));
+        } else {
+          return throwError(
+            () => new NotFoundException(`User with id '${id}' not found`)
+          );
+        }
+      }),
+      catchError((e) =>
+        throwError(() => new UnprocessableEntityException(e.message))
+      )
+    );
+
+}
