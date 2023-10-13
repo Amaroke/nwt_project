@@ -5,6 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { config } from 'dotenv';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
+import { DaoService } from './question/dao/dao.service';
+import { QuestionModule } from './question/question.module';
 
 config();
 
@@ -12,8 +14,9 @@ config();
   imports: [
     UserModule,
     MongooseModule.forRoot(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`),
+    QuestionModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DaoService],
 })
 export class AppModule { }
