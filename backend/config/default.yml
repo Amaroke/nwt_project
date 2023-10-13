@@ -1,0 +1,6 @@
+swagger:
+  title: New Web's Technologies course with NestJS
+  description: The User API description
+  version: 1.0
+  tag: user
+  path: documentation

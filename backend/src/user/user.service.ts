@@ -15,13 +15,10 @@ import {
     mergeMap,
   } from 'rxjs/operators';
 import { USER } from "src/data/user";
-import { stdout } from "process";
-import { Console } from "console";
 
 @Injectable()
 export class UserService {
   // private property to store all user
-  private _user: User[];
 
   /**
    * Class constructor
@@ -29,11 +26,6 @@ export class UserService {
    * @param {UserDao} _userDao instance of the DAO
    */
   constructor(private readonly _userDao: UserDao) {
-    this._user = [].concat(USER).map((user) => ({
-      ...user}))
-
-    console.log(this._user);
-    
   }
   
 
