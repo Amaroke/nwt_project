@@ -5,7 +5,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { config } from 'dotenv';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
-import { DaoService } from './question/dao/dao.service';
 import { QuestionModule } from './question/question.module';
 
 config();
@@ -17,6 +16,6 @@ config();
     QuestionModule,
   ],
   controllers: [AppController],
-  providers: [AppService, DaoService],
+  providers: [AppService],
 })
 export class AppModule { }

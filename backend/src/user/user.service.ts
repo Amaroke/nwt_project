@@ -1,20 +1,19 @@
 import { Observable, of, throwError } from "rxjs";
 import { User } from "./schemas/user.schema";
-import { 
-    Injectable,
-    NotFoundException,
-UnprocessableEntityException,
- } from "@nestjs/common";
+import {
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from "@nestjs/common";
 import { UserEntity } from "./entities/user.entity";
 import { UserDao } from "./dao/user.dao";
 import {
-    catchError,
-    defaultIfEmpty,
-    filter,
-    map,
-    mergeMap,
-  } from 'rxjs/operators';
-import { USER } from "src/data/user";
+  catchError,
+  defaultIfEmpty,
+  filter,
+  map,
+  mergeMap,
+} from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -27,7 +26,7 @@ export class UserService {
    */
   constructor(private readonly _userDao: UserDao) {
   }
-  
+
 
   /**
    * Returns all existing user in the list
@@ -42,14 +41,14 @@ export class UserService {
     );
 
 
-    /**
-   * Returns one user of the list matching id in parameter
-   *
-   * @param {string} id of the user
-   *
-   * @returns {Observable<UserEntity>}
-   */
-    findOne = (id: string): Observable<UserEntity> =>
+  /**
+ * Returns one user of the list matching id in parameter
+ *
+ * @param {string} id of the user
+ *
+ * @returns {Observable<UserEntity>}
+ */
+  findOne = (id: string): Observable<UserEntity> =>
     this._userDao.findById(id).pipe(
       mergeMap((user) => {
         if (!!user) {
