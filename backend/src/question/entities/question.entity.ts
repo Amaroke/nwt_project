@@ -46,8 +46,8 @@ export class QuestionEntity {
         example: '0123456789',
     })
     @Expose()
-    @Type(() => String)
-    owner: string;
+    @Type(() => Number)
+    owner: number;
 
     @ApiProperty({
         name: 'date',
@@ -64,6 +64,11 @@ export class QuestionEntity {
      * @param partial data to insert in object instance
      */
     constructor(partial: Partial<Question>) {
-        Object.assign(this, partial);
+        this.id = partial._id?.toString();
+        this.title = partial.title;
+        this.content = partial.content;
+        this.type = partial.type;
+        this.owner = partial.owner;
+        this.date = partial.date;
     }
 }

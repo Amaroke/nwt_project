@@ -34,7 +34,7 @@ export class CreateQuestionDto {
         description: 'ID of the question owner',
         example: '0123456789',
     })
-    @IsString()
+    @IsInt()
     @IsNotEmpty()
-    owner: string;
+    owner: number;
 }

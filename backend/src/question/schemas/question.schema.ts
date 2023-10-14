@@ -12,10 +12,10 @@ export type QuestionDocument = Question & Document;
 })
 export class Question {
     @Prop({
-        type: Number,
-        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        auto: true,
     })
-    id: number;
+    _id: any;
 
     @Prop({
         type: String,
@@ -36,7 +36,7 @@ export class Question {
     type: number;
 
     @Prop({
-        type: mongoose.Schema.Types.ObjectId,
+        type: Number, //TODO: SWAP FOR mongoose.Schema.Types.ObjectId later
         required: true,
     })
     owner: number;
@@ -50,6 +50,4 @@ export class Question {
 }
 
 export const QuestionSchema = SchemaFactory.createForClass(Question);
-
-QuestionSchema.index({ id: 1 }, { unique: true });
 

@@ -1,6 +1,6 @@
 import { ConflictException, Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, mergeMap, map } from 'rxjs/operators';
+import { catchError, mergeMap, map, filter, defaultIfEmpty } from 'rxjs/operators';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { QuestionEntity } from './entities/question.entity';
@@ -12,16 +12,9 @@ export class QuestionService {
 
     findAll = (): Observable<QuestionEntity[] | void> =>
         this._questionsDao.find().pipe(
-            catchError((e) =>
-                throwError(() => new UnprocessableEntityException(e.message)),
-            ),
-            map((questions) => {
-                if (questions) {
-                    return questions.map((question) => new QuestionEntity(question));
-                } else {
-                    return [];
-                }
-            }),
+            filter(Boolean),
+            map((people) => (people || []).map((person) => new QuestionEntity(person))),
+            defaultIfEmpty(undefined),
         );
 
 
