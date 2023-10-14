@@ -7,6 +7,7 @@ import { SwaggerConfig } from './app.types';
 import { UserModule } from './user/user.module';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import * as Config from 'config';
+import { QuestionModule } from './question/question.module';
 
 
 async function bootstrap(swaggerConfig: SwaggerConfig) {
@@ -34,12 +35,12 @@ async function bootstrap(swaggerConfig: SwaggerConfig) {
     .build();
 
   // Create swagger document
-  const userDocument = SwaggerModule.createDocument(app, options, {
-    include: [UserModule],
+  const swaggerDocument = SwaggerModule.createDocument(app, options, {
+    include: [UserModule, QuestionModule],
   });
 
   // Setup swagger module
-  SwaggerModule.setup(swaggerConfig.path, app, userDocument);
+  SwaggerModule.setup(swaggerConfig.path, app, swaggerDocument);
 
   // Start application
   await app.listen(3000);

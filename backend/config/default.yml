@@ -1,6 +1,6 @@
 swagger:
-  title: New Web's Technologies course with NestJS
-  description: The User API description
+  title: Documentation NWT Project
+  description: The NWT Project API description
   version: 1.0
-  tag: user
+  tag: nwt
   path: documentation

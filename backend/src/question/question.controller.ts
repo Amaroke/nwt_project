@@ -6,6 +6,8 @@ import { QuestionEntity } from './entities/question.entity';
 import { QuestionService } from './question.service';
 import { HttpInterceptor } from '../interceptors/http.interceptor';
 import { Observable } from 'rxjs';
+import { IsMongoId, IsNotEmpty } from '@nestjs/class-validator';
+import { HandlerParams } from './validators/handler-params';
 
 @ApiTags('questions')
 @Controller('questions')
@@ -26,8 +28,8 @@ export class QuestionController {
     @ApiResponse({ status: 200, type: QuestionEntity, description: 'Question trouvée' })
     @ApiResponse({ status: 404, description: 'Question non trouvée' })
     @Get(':id')
-    findOne(@Param('id') id: string): Observable<QuestionEntity> {
-        return this.questionService.findOne(id);
+    findOne(@Param() params: HandlerParams): Observable<QuestionEntity> {
+        return this.questionService.findOne(params.id);
     }
 
     @ApiOperation({ summary: 'Créer une nouvelle question' })
@@ -46,8 +48,8 @@ export class QuestionController {
     @ApiResponse({ status: 400, description: "Mauvaise demande" })
     @ApiResponse({ status: 404, description: "Question non trouvée" })
     @Put(':id')
-    update(@Param('id') id: string, @Body() updateQuestionDto: UpdateQuestionDto): Observable<QuestionEntity> {
-        return this.questionService.update(id, updateQuestionDto);
+    update(@Param() params: HandlerParams, @Body() updateQuestionDto: UpdateQuestionDto): Observable<QuestionEntity> {
+        return this.questionService.update(params.id, updateQuestionDto);
     }
 
     @ApiOperation({ summary: 'Supprimer une question par ID' })
@@ -55,7 +57,7 @@ export class QuestionController {
     @ApiResponse({ status: 204, description: 'Question supprimée avec succès' })
     @ApiResponse({ status: 404, description: 'Question non trouvée' })
     @Delete(':id')
-    remove(@Param('id') id: string): Observable<void> {
-        return this.questionService.delete(id);
+    remove(@Param() params: HandlerParams): Observable<void> {
+        return this.questionService.delete(params.id);
     }
 }
