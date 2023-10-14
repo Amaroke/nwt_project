@@ -7,7 +7,7 @@ import { UpdateQuestionDto } from '../dto/update-question.dto';
 import { Question } from '../schemas/question.schema';
 
 @Injectable()
-export class QuestionsDao {
+export class QuestionDao {
     /**
      * Class constructor
      *
