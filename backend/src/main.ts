@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { Logger } from '@nestjs/common';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { SwaggerConfig } from './app.types';
@@ -8,19 +9,19 @@ import * as Config from 'config';
 
 
 async function bootstrap(swaggerConfig: SwaggerConfig) {
+
+  // Create nest application
   const app = await NestFactory.create(AppModule);
-  
-  
-  // use global pipe validation
-  await app.useGlobalPipes(
+
+  // Use global pipe validation
+  app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
     }),
   );
 
-
-  // create swagger options
+  // Create swagger options
   const options = new DocumentBuilder()
     .setTitle(swaggerConfig.title)
     .setDescription(swaggerConfig.description)
@@ -28,13 +29,16 @@ async function bootstrap(swaggerConfig: SwaggerConfig) {
     .addTag(swaggerConfig.tag)
     .build();
 
-  // create swagger document
+  // Create swagger document
   const userDocument = SwaggerModule.createDocument(app, options, {
     include: [UserModule],
   });
 
-  // setup swagger module
+  // Setup swagger module
   SwaggerModule.setup(swaggerConfig.path, app, userDocument);
+
+  // Start application
   await app.listen(3000);
+  Logger.log(`Application served at http://localhost:3000`, 'bootstrap');
 }
 bootstrap(Config.get<SwaggerConfig>('swagger'),);
