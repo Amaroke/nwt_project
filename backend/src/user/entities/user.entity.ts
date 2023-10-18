@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import {Exclude,Expose,Type} from "@nestjs/class-transformer";
 import { User } from "../schemas/user.schema";
+
 @Exclude()
 export class UserEntity {
   @ApiProperty({
@@ -64,6 +65,11 @@ export class UserEntity {
    * @param partial data to insert in object instance
    */
   constructor(partial: Partial<User>) {
-    Object.assign(this, partial);
+    this.id = partial._id?.toString();
+    this.firstname = partial.firstname;
+    this.lastname = partial.lastname;
+    this.email = partial.email;
+    this.password = partial.password;
+    this.phone = partial.phone;
   }
 }

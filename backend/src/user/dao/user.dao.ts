@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { from, map, Observable } from 'rxjs';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { User } from '../schemas/user.schema';
+import { UpdateUserDto } from '../dto/update-user.dto';
 
 
 @Injectable()
@@ -40,7 +41,44 @@ export class UserDao {
   findById = (id: string): Observable<User | void> =>
   from(this._userModel.findById(id));
 
+
+  /**
+     * Save a new user to the database
+     *
+     * @param {CreateUserDto} user to create
+     *
+     * @return {Observable<User>}
+     */
   save = (user: CreateUserDto): Observable<User> =>
   from(new this._userModel(user).save());
  
+
+  /**
+     * Update a user in the list of users
+     *
+     * @param {string} id of the user in the database
+     * @param {UpdateuserDto} user to update
+     *
+     * @return {Observable<user | void>}
+     */
+  findByIdAndUpdate = (
+    id: string,
+    user: UpdateUserDto,
+): Observable<User | void> =>
+    from(
+        this._userModel.findByIdAndUpdate(id, user, {
+            new: true,
+            runValidators: true,
+        }),
+    );
+
+  /**
+   * Delete a user from the list of users
+   *
+   * @param {string} id of the user in the database
+   *
+   * @return {Observable<User | void>}
+   */
+  findByIdAndRemove = (id: string): Observable<User | void> =>
+      from(this._userModel.findByIdAndRemove(id));
 }

@@ -7,10 +7,6 @@ export type UserDocument = User & Document;
 @Schema({
     toJSON: {
       virtuals: true,
-      transform: (doc: any, ret: any) => {
-        // delete obsolete data
-        delete ret._id;
-      },
     },
     versionKey: false,
   })
@@ -67,4 +63,3 @@ export type UserDocument = User & Document;
   }
 
   export const UserSchema = SchemaFactory.createForClass(User);
-  UserSchema.index({firstname:1,lastname:1},{unique:true});
