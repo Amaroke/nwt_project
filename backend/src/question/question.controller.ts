@@ -6,7 +6,6 @@ import { QuestionEntity } from './entities/question.entity';
 import { QuestionService } from './question.service';
 import { HttpInterceptor } from '../interceptors/http.interceptor';
 import { Observable } from 'rxjs';
-import { IsMongoId, IsNotEmpty } from '@nestjs/class-validator';
 import { HandlerParams } from './validators/handler-params';
 
 @ApiTags('questions')
