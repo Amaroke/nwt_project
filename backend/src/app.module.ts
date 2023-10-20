@@ -11,7 +11,7 @@ config();
 @Module({
   imports: [
     UserModule,
-    MongooseModule.forRoot(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`),
+    MongooseModule.forRoot(process.env.MONGODB_URI),
     QuestionModule,
   ],
   controllers: [AppController],
