@@ -18,8 +18,15 @@ async function bootstrap(swaggerConfig: SwaggerConfig) {
     new FastifyAdapter({ logger: true }),
   );
 
+  // Enable cors
   app.enableCors({
     origin: 'http://localhost:4200',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
+  app.enableCors({
+    origin: 'https://amaroke.github.io',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
