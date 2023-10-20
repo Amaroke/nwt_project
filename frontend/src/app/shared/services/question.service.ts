@@ -2,35 +2,36 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Question } from '../types/question.type';
-import { config } from 'dotenv';
-
-config();
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
-  private apiUrl = process.env['API_URL'];
 
-  constructor(private http: HttpClient) { }
+  private readonly _apiUrl: any;
+
+  constructor(private _http: HttpClient) {
+    this._apiUrl = `${environment.apiUrl}`;
+  }
 
   getQuestions(): Observable<Question[]> {
-    return this.http.get<Question[]>(`${this.apiUrl}/questions`);
+    return this._http.get<Question[]>(`${this._apiUrl}/questions`);
   }
 
   getQuestion(id: number): Observable<Question> {
-    return this.http.get<Question>(`${this.apiUrl}/questions/${id}`);
+    return this._http.get<Question>(`${this._apiUrl}/questions/${id}`);
   }
 
   createQuestion(questionData: Question): Observable<Question> {
-    return this.http.post<Question>(`${this.apiUrl}/questions`, questionData);
+    return this._http.post<Question>(`${this._apiUrl}/questions`, questionData);
   }
 
   updateQuestion(id: number, questionData: Question): Observable<Question> {
-    return this.http.put<Question>(`${this.apiUrl}/questions/${id}`, questionData);
+    return this._http.put<Question>(`${this._apiUrl}/questions/${id}`, questionData);
   }
 
   deleteQuestion(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/questions/${id}`);
+    return this._http.delete<void>(`${this._apiUrl}/questions/${id}`);
   }
 }

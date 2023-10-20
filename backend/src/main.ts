@@ -18,6 +18,12 @@ async function bootstrap(swaggerConfig: SwaggerConfig) {
     new FastifyAdapter({ logger: true }),
   );
 
+  app.enableCors({
+    origin: 'http://localhost:4200',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
   // Use global pipe validation
   app.useGlobalPipes(
     new ValidationPipe({
