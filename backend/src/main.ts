@@ -20,7 +20,7 @@ async function bootstrap(swaggerConfig: SwaggerConfig) {
 
   // Enable cors
   app.enableCors({
-    origin: ['http://localhost:4200', 'https://amaroke.github.io/nwt_project'],
+    origin: ['*'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
