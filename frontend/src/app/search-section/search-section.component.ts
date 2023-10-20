@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: []
 })
 export class SearchSectionComponent {
+  activeTab = 'question'; // Initial tab is 'question'
+
+  showSearch(tab: string) {
+    this.activeTab = tab;
+  }
 
 }
