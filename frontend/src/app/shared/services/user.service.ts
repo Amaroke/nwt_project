@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  
+
 
   private readonly _apiUrl: any;
 
@@ -36,7 +36,7 @@ export class UserService {
     return this._http.delete<void>(`${this._apiUrl}/users/${id}`);
   }
 
-  getUserByEmail(email: string) {
-    return this._http.get<User>(`${this._apiUrl}/users/login/${email}`);
+  loginUser(email: string, password: string): Observable<String> {
+    return this._http.get<User>(`${this._apiUrl}/login`, email);
   }
 }

@@ -1,4 +1,4 @@
-import { Component,EventEmitter,Output,Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../shared/types/user.type';
 import { UserService } from '../shared/services/user.service';
@@ -8,7 +8,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: []
 })
 export class RegisterComponent {
 
@@ -23,11 +23,11 @@ export class RegisterComponent {
     this._model = {} as User;
 
   }
-   get form():FormGroup{
+  get form(): FormGroup {
     return this._form;
-   }
+  }
 
-   @Input()
+  @Input()
   set model(model: User) {
     this._model = model;
   }
@@ -48,7 +48,7 @@ export class RegisterComponent {
       ),
       _email: new FormControl(
         '',
-        Validators.compose([Validators.required,Validators.minLength(10)])
+        Validators.compose([Validators.required, Validators.minLength(10)])
       ),
       get email() {
         return this._email;
@@ -67,10 +67,10 @@ export class RegisterComponent {
   }
 
   submit(user: User): void {
-    console.log("Le user = "+ user);
+    console.log("Le user = " + user);
     this._userService.createUser(user);
   }
-  
+
   @Output('submit')
   get submit$(): EventEmitter<User> {
     return this._submit$;

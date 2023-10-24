@@ -20,7 +20,7 @@ import { UpdateUserDto } from "./dto/update-user.dto";
 
 @Injectable()
 export class UserService {
-  
+
   // private property to store all user
 
   /**
@@ -72,21 +72,21 @@ export class UserService {
    * Create a new user
    * @param user
    * @returns {Observable<UserEntity>}
-   */    
+   */
   create = (user: CreateUserDto): Observable<UserEntity> =>
-      this._userDao.save(user).pipe(
-          catchError((e) =>
-              e.code === 11000
-                  ? throwError(
-                      () =>
-                          new ConflictException(
-                              'A user with a similar email and content already exists',
-                          ),
-                  )
-                  : throwError(() => new UnprocessableEntityException(e.message)),
-          ),
-          mergeMap((userCreated) => of(new UserEntity(userCreated))),
-      );
+    this._userDao.save(user).pipe(
+      catchError((e) =>
+        e.code === 11000
+          ? throwError(
+            () =>
+              new ConflictException(
+                'A user with a similar email and content already exists',
+              ),
+          )
+          : throwError(() => new UnprocessableEntityException(e.message)),
+      ),
+      mergeMap((userCreated) => of(new UserEntity(userCreated))),
+    );
 
   /**
    * Updates a user's information with id 
@@ -96,23 +96,23 @@ export class UserService {
    */
   update = (id: string, user: UpdateUserDto): Observable<UserEntity> =>
     this._userDao.findByIdAndUpdate(id, user).pipe(
-        catchError((e) =>
-            e.code === 11000
-                ? throwError(
-                    () =>
-                        new ConflictException(
-                            'A user with a similar email already exists',
-                        ),
-                )
-                : throwError(() => new UnprocessableEntityException(e.message)),
-        ),
-        mergeMap((userUpdated) =>
-            !!userUpdated
-                ? of(new UserEntity(userUpdated))
-                : throwError(
-                    () => new NotFoundException(`User with id '${id}' not found`),
-                ),
-        ),
+      catchError((e) =>
+        e.code === 11000
+          ? throwError(
+            () =>
+              new ConflictException(
+                'A user with a similar email already exists',
+              ),
+          )
+          : throwError(() => new UnprocessableEntityException(e.message)),
+      ),
+      mergeMap((userUpdated) =>
+        !!userUpdated
+          ? of(new UserEntity(userUpdated))
+          : throwError(
+            () => new NotFoundException(`User with id '${id}' not found`),
+          ),
+      ),
     );
 
   /**
@@ -121,39 +121,38 @@ export class UserService {
    * @returns {Observable<void>}
    */
   delete = (id: string): Observable<void> =>
-  this._userDao.findByIdAndRemove(id).pipe(
+    this._userDao.findByIdAndRemove(id).pipe(
       catchError((e) =>
-          throwError(() => new UnprocessableEntityException(e.message)),
+        throwError(() => new UnprocessableEntityException(e.message)),
       ),
       mergeMap((userDeleted) =>
-          !!userDeleted
-              ? of(undefined)
-              : throwError(
-                  () => new NotFoundException(`User with id '${id}' not found`),
-              ),
+        !!userDeleted
+          ? of(undefined)
+          : throwError(
+            () => new NotFoundException(`User with id '${id}' not found`),
+          ),
       ),
-  );
+    );
 
-  findByEmail(email: string): any {
-   this._userDao.findByEmail(email);
-   console.log(this._userDao.findByEmail(email));
-   return email;
-  }
-   //.pipe(
-  //     mergeMap((user) => {
-  //       if (!!user) {
-  //         console.log("test");
-  //         return of(new UserEntity(user));
-  //       } else {
-  //         console.log("test 2");
-  //         return throwError(
-  //           () => new NotFoundException(`User with id '${email}' not found`)
-  //         );
-  //       }
-  //     }),
-  //     catchError((e) =>
-  //       throwError(() => new UnprocessableEntityException(e.message))
-  //     )
-  //   );
-  // }
+  /**
+   * Authenticate the user with the provided email and password
+   * @param email The email of the user
+   * @param password The user's password
+   * @returns {Observable<string>}
+   */
+  login = (email: string, password: string): Observable<string> =>
+    this._userDao.findByEmail(email).pipe(
+      mergeMap((user) => {
+        if (!user) {
+          return throwError(() => new NotFoundException(`User with email '${email}' not found`));
+        }
+
+        if (user.password !== password) {
+          return throwError(() => new UnprocessableEntityException('Invalid password'));
+        }
+
+        return of(user._id?.toString());
+      }),
+    );
+
 }

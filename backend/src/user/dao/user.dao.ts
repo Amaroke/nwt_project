@@ -10,15 +10,15 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 @Injectable()
 export class UserDao {
 
-    /**
-   * Class constructor
-   *
-   * @param {Model<User>} _userModel instance of the model representing a user
-   */
+  /**
+ * Class constructor
+ *
+ * @param {Model<User>} _userModel instance of the model representing a user
+ */
   constructor(
     @InjectModel(User.name)
     private readonly _userModel: Model<User>,
-  ) {}
+  ) { }
 
   /**
    * Call mongoose method, call toJSON on each result and returns UserModel[]
@@ -27,29 +27,29 @@ export class UserDao {
    */
   find = (): Observable<User[]> =>
     from(this._userModel.find({})).pipe(
-      map((people: any) => people.map((p)=>p.toJSON())),
+      map((people: any) => people.map((p) => p.toJSON())),
       map((people) => [].concat(people)));
 
 
-   /**
-   * Returns one user of the list matching id in parameter
-   *
-   * @param {string} id of the user in the db
-   *
-   * @return {Observable<User | void>}
-   */
+  /**
+  * Returns one user of the list matching id in parameter
+  *
+  * @param {string} id of the user in the db
+  *
+  * @return {Observable<User | void>}
+  */
   findById = (id: string): Observable<User | void> =>
-  from(this._userModel.findById(id));
+    from(this._userModel.findById(id));
 
   /**
-   * Returns one user of the list matching email in parameter
-   *
-   * @param {string} email of the user in the db
-   *
-   * @return {Observable<User | void>}
-   */
+ * Returns one user from the list matching the provided email
+ *
+ * @param {string} email The email of the user to search for
+ *
+ * @return {Observable<User | void>}
+ */
   findByEmail = (email: string): Observable<User | void> =>
-  from(this._userModel.findOne({ email }))
+    from(this._userModel.findOne({ email }));
 
   /**
      * Save a new user to the database
@@ -59,8 +59,8 @@ export class UserDao {
      * @return {Observable<User>}
      */
   save = (user: CreateUserDto): Observable<User> =>
-  from(new this._userModel(user).save());
- 
+    from(new this._userModel(user).save());
+
 
   /**
      * Update a user in the list of users
@@ -73,12 +73,12 @@ export class UserDao {
   findByIdAndUpdate = (
     id: string,
     user: UpdateUserDto,
-): Observable<User | void> =>
+  ): Observable<User | void> =>
     from(
-        this._userModel.findByIdAndUpdate(id, user, {
-            new: true,
-            runValidators: true,
-        }),
+      this._userModel.findByIdAndUpdate(id, user, {
+        new: true,
+        runValidators: true,
+      }),
     );
 
   /**
@@ -89,5 +89,5 @@ export class UserDao {
    * @return {Observable<User | void>}
    */
   findByIdAndRemove = (id: string): Observable<User | void> =>
-      from(this._userModel.findByIdAndRemove(id));
+    from(this._userModel.findByIdAndRemove(id));
 }

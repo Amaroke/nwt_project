@@ -1,5 +1,5 @@
-import { ClassSerializerInterceptor, Controller, Get, Param, UseInterceptors ,Post,Put,Delete,Body} from '@nestjs/common';
-import { ApiBadRequestResponse,ApiBody,ApiOperation, ApiNoContentResponse, ApiNotFoundResponse, ApiOkResponse, ApiParam, ApiTags, ApiUnprocessableEntityResponse, ApiResponse } from '@nestjs/swagger';
+import { ClassSerializerInterceptor, Controller, Get, Param, UseInterceptors, Post, Put, Delete, Body } from '@nestjs/common';
+import { ApiBadRequestResponse, ApiBody, ApiOperation, ApiNoContentResponse, ApiNotFoundResponse, ApiOkResponse, ApiParam, ApiTags, ApiUnprocessableEntityResponse, ApiResponse } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { UserEntity } from './entities/user.entity';
 import { Observable } from 'rxjs';
@@ -7,8 +7,7 @@ import { HandlerParams } from './validators/handler-params';
 import { HttpInterceptor } from 'src/interceptors/http.interceptor';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Console, log } from 'console';
-import { Handler } from './validators/handler';
+import { LoginDto } from './dto/login-user.dto';
 
 @ApiTags('users')
 @Controller('users')
@@ -16,11 +15,11 @@ import { Handler } from './validators/handler';
 @UseInterceptors(ClassSerializerInterceptor)
 export class UserController {
 
-    /**
-   * Class constructor
-   * @param _userService
-   */
-  constructor(private readonly _userService: UserService) {}
+  /**
+ * Class constructor
+ * @param _userService
+ */
+  constructor(private readonly _userService: UserService) { }
 
 
   /**
@@ -64,7 +63,8 @@ export class UserController {
   })
   @ApiBadRequestResponse({
     status: 400,
-    description: 'Le paramètre fourni n\'est pas bon' })
+    description: 'Le paramètre fourni n\'est pas bon'
+  })
   @ApiParam({
     name: 'id',
     description: 'Identifiant unique de l\'utilisateur dans la BDD',
@@ -82,7 +82,7 @@ export class UserController {
   @ApiResponse({ status: 400, description: 'Mauvaise demande' })
   @Post()
   create(@Body() createUserDto: CreateUserDto): Observable<UserEntity> {
-      return this._userService.create(createUserDto);
+    return this._userService.create(createUserDto);
   }
 
   @ApiOperation({ summary: 'Mettre à jour un utilisateur par ID' })
@@ -93,7 +93,7 @@ export class UserController {
   @ApiResponse({ status: 404, description: "Utilisateur non trouvée" })
   @Put(':id')
   update(@Param() params: HandlerParams, @Body() updateUserDto: UpdateUserDto): Observable<UserEntity> {
-      return this._userService.update(params.id, updateUserDto);
+    return this._userService.update(params.id, updateUserDto);
   }
 
   @ApiOperation({ summary: 'Supprimer un utilisateur par ID' })
@@ -102,42 +102,32 @@ export class UserController {
   @ApiResponse({ status: 404, description: 'Utilisateur non trouvée' })
   @Delete(':id')
   remove(@Param() params: HandlerParams): Observable<void> {
-      return this._userService.delete(params.id);
+    return this._userService.delete(params.id);
   }
-  
+
 
   /**
-   * Handler to answer to GET /user/:email route
-   *
-   * @param {HandlerParams} params list of route params to take user email
-   *
-   * @returns Observable<UserEntity>
-   */
+    * Handler to answer to POST /login route with email and password in the request body
+    *
+    * @param {LoginDto} loginData The data containing email and password
+    *
+    * @returns Observable<UserEntity>
+    */
   @ApiOkResponse({
     status: 200,
-    description: 'Recupère l\'utilisateur selon l\'Email',
+    description: 'Connecte l\'utilisateur avec succès',
     type: UserEntity,
   })
-  @ApiNotFoundResponse({
-    status: 404,
-    description: 'L\'utilisateur avec cette l\'Email n\'existe pas dans la BDD  ',
-  })
   @ApiUnprocessableEntityResponse({
-    status: 500,
-    description: "La requête ne peut pas être effectuer sur la BDD",
+    status: 422,
+    description: 'La requête ne peut pas être effectuée sur la BDD',
   })
   @ApiBadRequestResponse({
     status: 400,
-    description: 'Le paramètre fourni n\'est pas bon' })
-  @ApiParam({
-    name: 'email',
-    description: 'Email unique de l\'utilisateur dans la BDD',
-    type: String,
-    allowEmptyValue: false,
+    description: 'Les données fournies ne sont pas valides',
   })
-  @Get('/login/:email')
-  findOneByEmail(@Param() param: Handler): any {
-    console.log(param.email)
-    return this._userService.findByEmail(param.email);
+  @Post('/login')
+  login(@Body() loginData: LoginDto): Observable<String> {
+    return this._userService.login(loginData.email, loginData.password);
   }
 }

@@ -5,12 +5,12 @@ import { UserService } from '../shared/services/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: []
 })
 export class LoginComponent {
   @ViewChild('loginForm', { static: false }) loginForm!: NgForm;
 
-  constructor(private readonly _userService: UserService){}
+  constructor(private readonly _userService: UserService) { }
 
   onSubmit(form: NgForm) {
     console.log(form.value);
