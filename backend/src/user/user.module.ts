@@ -6,7 +6,6 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { UserDao } from './dao/user.dao';
 
-
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),

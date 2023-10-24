@@ -20,6 +20,7 @@ import { UpdateUserDto } from "./dto/update-user.dto";
 
 @Injectable()
 export class UserService {
+  
   // private property to store all user
 
   /**
@@ -133,4 +134,26 @@ export class UserService {
       ),
   );
 
+  findByEmail(email: string): any {
+   this._userDao.findByEmail(email);
+   console.log(this._userDao.findByEmail(email));
+   return email;
+  }
+   //.pipe(
+  //     mergeMap((user) => {
+  //       if (!!user) {
+  //         console.log("test");
+  //         return of(new UserEntity(user));
+  //       } else {
+  //         console.log("test 2");
+  //         return throwError(
+  //           () => new NotFoundException(`User with id '${email}' not found`)
+  //         );
+  //       }
+  //     }),
+  //     catchError((e) =>
+  //       throwError(() => new UnprocessableEntityException(e.message))
+  //     )
+  //   );
+  // }
 }

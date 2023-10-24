@@ -37,8 +37,10 @@ export type UserDocument = User & Document;
     
     @Prop({
         type: String,
+        unique: true,
         required: true,
         trim: true,
+        
       })
       email: string;
     

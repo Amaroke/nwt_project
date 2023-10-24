@@ -3,6 +3,7 @@ import {
     IsNotEmpty,
     IsPhoneNumber,
     IsString,
+    MinLength,
   } from '@nestjs/class-validator';
   import { ApiProperty} from '@nestjs/swagger';
   
@@ -38,12 +39,13 @@ import {
     
 
     @ApiProperty({
-        name: 'lastname',
-        description: 'Lastname',
-        example: 'Jacques',
+        name: 'password',
+        description: 'password',
+        example: 'Jacques54',
     })
     @IsString()
     @IsNotEmpty()
+    @MinLength(5)
     password: string;
 
     @ApiProperty({

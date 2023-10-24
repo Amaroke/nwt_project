@@ -7,6 +7,8 @@ import { HandlerParams } from './validators/handler-params';
 import { HttpInterceptor } from 'src/interceptors/http.interceptor';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Console, log } from 'console';
+import { Handler } from './validators/handler';
 
 @ApiTags('users')
 @Controller('users')
@@ -101,5 +103,41 @@ export class UserController {
   @Delete(':id')
   remove(@Param() params: HandlerParams): Observable<void> {
       return this._userService.delete(params.id);
+  }
+  
+
+  /**
+   * Handler to answer to GET /user/:email route
+   *
+   * @param {HandlerParams} params list of route params to take user email
+   *
+   * @returns Observable<UserEntity>
+   */
+  @ApiOkResponse({
+    status: 200,
+    description: 'Recupère l\'utilisateur selon l\'Email',
+    type: UserEntity,
+  })
+  @ApiNotFoundResponse({
+    status: 404,
+    description: 'L\'utilisateur avec cette l\'Email n\'existe pas dans la BDD  ',
+  })
+  @ApiUnprocessableEntityResponse({
+    status: 500,
+    description: "La requête ne peut pas être effectuer sur la BDD",
+  })
+  @ApiBadRequestResponse({
+    status: 400,
+    description: 'Le paramètre fourni n\'est pas bon' })
+  @ApiParam({
+    name: 'email',
+    description: 'Email unique de l\'utilisateur dans la BDD',
+    type: String,
+    allowEmptyValue: false,
+  })
+  @Get('/login/:email')
+  findOneByEmail(@Param() param: Handler): any {
+    console.log(param.email)
+    return this._userService.findByEmail(param.email);
   }
 }

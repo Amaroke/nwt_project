@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { from, map, Observable } from 'rxjs';
+import { filter, from, map, Observable } from 'rxjs';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { User } from '../schemas/user.schema';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -41,6 +41,15 @@ export class UserDao {
   findById = (id: string): Observable<User | void> =>
   from(this._userModel.findById(id));
 
+  /**
+   * Returns one user of the list matching email in parameter
+   *
+   * @param {string} email of the user in the db
+   *
+   * @return {Observable<User | void>}
+   */
+  findByEmail = (email: string): Observable<User | void> =>
+  from(this._userModel.findOne({ email }))
 
   /**
      * Save a new user to the database

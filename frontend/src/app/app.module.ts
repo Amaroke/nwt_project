@@ -13,6 +13,10 @@ import { SearchSectionComponent } from './search-section/search-section.componen
 import { MainSectionComponent } from './main-section/main-section.component';
 import { ListSectionComponent } from './list-section/list-section.component';
 import { PostSectionComponent } from './post-section/post-section.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,12 +26,16 @@ import { PostSectionComponent } from './post-section/post-section.component';
     SearchSectionComponent,
     MainSectionComponent,
     ListSectionComponent,
-    PostSectionComponent
+    PostSectionComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
     NgIconsModule.withIcons({ heroArrowRightOnRectangle, heroUserCircle }),
   ],
   providers: [],
