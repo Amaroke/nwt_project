@@ -17,6 +17,7 @@ import {
 } from 'rxjs/operators';
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
+import { IdEntity } from "./entities/id.entity";
 
 @Injectable()
 export class UserService {
@@ -140,7 +141,7 @@ export class UserService {
    * @param password The user's password
    * @returns {Observable<string>}
    */
-  login = (email: string, password: string): Observable<string> =>
+  login = (email: string, password: string): Observable<IdEntity> =>
     this._userDao.findByEmail(email).pipe(
       mergeMap((user) => {
         if (!user) {
@@ -151,7 +152,7 @@ export class UserService {
           return throwError(() => new UnprocessableEntityException('Invalid password'));
         }
 
-        return of(user._id?.toString());
+        return of(new IdEntity(user));
       }),
     );
 

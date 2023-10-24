@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 export class UserService {
 
 
-  private readonly _apiUrl: any;
+  private readonly _apiUrl: string;
 
   constructor(private _http: HttpClient) {
     this._apiUrl = `${environment.apiUrl}`;
@@ -36,7 +36,10 @@ export class UserService {
     return this._http.delete<void>(`${this._apiUrl}/users/${id}`);
   }
 
-  loginUser(email: string, password: string): Observable<String> {
-    return this._http.get<User>(`${this._apiUrl}/login`, email);
+  loginUser(email: string, password: string): Observable<string> {
+    const loginData = { email, password };
+    return this._http.put<string>(`${this._apiUrl}/users/login`, loginData);
   }
+
+
 }

@@ -8,6 +8,7 @@ import { HttpInterceptor } from 'src/interceptors/http.interceptor';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { LoginDto } from './dto/login-user.dto';
+import { IdEntity } from './entities/id.entity';
 
 @ApiTags('users')
 @Controller('users')
@@ -126,8 +127,8 @@ export class UserController {
     status: 400,
     description: 'Les données fournies ne sont pas valides',
   })
-  @Post('/login')
-  login(@Body() loginData: LoginDto): Observable<String> {
+  @Put('/login')
+  login(@Body() loginData: LoginDto): Observable<IdEntity> {
     return this._userService.login(loginData.email, loginData.password);
   }
 }
