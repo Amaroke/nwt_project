@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../shared/services/auth.service';
 import { UserService } from '../shared/services/user.service';
 
 @Component({
@@ -8,13 +7,16 @@ import { UserService } from '../shared/services/user.service';
   styleUrls: []
 })
 export class NavigationBarComponent {
-  
-  constructor(public authService: AuthService,public userService: UserService) {
-  
+
+  connectUser: any = localStorage.getItem('userId');
+
+  constructor(public userService: UserService) {
+
   }
+
   logout() {
-    this.authService.logout();
-    
+    localStorage.removeItem('userId');
+    this.connectUser = null;
   }
 
 

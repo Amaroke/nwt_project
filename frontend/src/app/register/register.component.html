@@ -1,87 +1,123 @@
-    <div class="bg-gray-100 flex justify-center items-center h-screen">
-        <!-- Left: Image -->
-    <div class="w-1/2 h-screen hidden lg:block">
-    <img src="https://placehold.co/800x/667fff/ffffff.png?text=Your+Image&font=Montserrat" alt="Placeholder Image" class="object-cover w-full h-full">
-    </div>
-    <!-- Right: Register Form -->
-    <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
-    <h1 class="text-2xl font-semibold mb-4">Register</h1>
+<div class="bg-gray-100 flex justify-center items-center h-full -mt-14">
+
+  <div class="w-1/2 hidden lg:block">
+    <img
+      src="https://img.freepik.com/vecteurs-libre/neon-realiste-rejoignez-nous-lettrage_23-2148948795.jpg?w=740&t=st=1698330377~exp=1698330977~hmac=9c8b0838f6be46b5959d6f89238ce476751e129f01b0c7f5bd2135f8eefb42b8"
+      alt="Placeholder Image" class="w-full h-screen">
+  </div>
+
+  <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2 h-screen -mt-32 -mt-bot-32">
+    <h1 class="font-bold mb-4 text-center">S'inscrire</h1>
     <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm)" novalidate>
 
-        <!-- Firstname Input -->
-        <div class="mb-4">
-            <label for="firstname" class="block text-gray-600">Firstname</label>
-            <input matInput placeholder="First name" required type="text" id="firstname" name="firstname" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" 
-            autocomplete="off" minlength="2" formControlName="firstname" >
-            <mat-error *ngIf="loginForm.get('firstname')?.dirty && loginForm.get('firstname')?.hasError('required')">
-                First name is <strong>required</strong>
-              </mat-error>
-            <mat-error *ngIf="loginForm.get('firstname')?.dirty && loginForm.get('firstname')?.hasError('minlength')">
-                First name is <strong>2 chars min</strong>
-            </mat-error>
-        </div>
+      <div class="mb-4">
+        <label for="firstname" class="block text-gray-600">Prénom</label>
+        <input matInput placeholder="John" required type="text" id="firstname" name="firstname"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+          autocomplete="off" minlength="2" formControlName="firstname" />
 
-        <!-- Lastname Input -->
-        <div class="mb-4">
-            <label for="lastname" class="block text-gray-600">Lastname</label>
-            <input matInput  placeholder="last name" required  type="text" id="lastname" name="lastname" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-            autocomplete="off" minlength="2" formControlName="lastname">
-            <mat-error *ngIf="loginForm.get('lastname')?.dirty && loginForm.get('lastname')?.hasError('required')">
-                Last name is <strong>required</strong>
-              </mat-error>
-              <mat-error *ngIf="loginForm.get('lastname')?.dirty && loginForm.get('lastname')?.hasError('minlength')">
-                Last name is <strong>2 chars min</strong>
-              </mat-error>
-        </div>
+        <span class="min-h-32">
+          &nbsp;
+          <mat-error class="select-none"
+            *ngIf=" loginForm.get('firstname')?.dirty && loginForm.get('firstname')?.hasError('required')">
+            Le prénom est <strong>obligatoire</strong>
+          </mat-error>
+          <mat-error class="select-none"
+            *ngIf="loginForm.get('firstname')?.dirty && loginForm.get('firstname')?.hasError('minlength')">
+            Le prénom doit faire un minimum de <strong>deux caractères</strong>
+          </mat-error>
+        </span>
+      </div>
 
-        
-        <!-- Email Input -->
-        <div class="mb-4">
-            <label for="email" class="block text-gray-600">Email</label>
-            <input matInput placeholder="Email" required type="text" id="email" name="email" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" 
-            autocomplete="off" formControlName="email" >
-            <mat-error *ngIf="loginForm.get('email')?.dirty && loginForm.get('email')?.hasError('required')">
-                Email is <strong>required</strong>
-              </mat-error>
-              <mat-error *ngIf="loginForm.get('email')?.dirty && !loginForm.get('email')?.hasError('required') && loginForm.get('email')?.hasError('email')">
-                Invalid email <strong>(ex: name.firstname@gmail.com)</strong>
-              </mat-error>
-        </div>
-        <!-- Password Input -->
-        <div class="mb-4">
-            <label for="password" class="block text-gray-600">Password</label>
-            <input matInput minlength="2" required type="password" id="password" name="password" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" 
-            autocomplete="off" formControlName="password" >
-            <mat-error *ngIf="loginForm.get('password')?.dirty && loginForm.get('password')?.hasError('required')">
-                password is <strong>required</strong>
-              </mat-error>
-              <mat-error *ngIf="loginForm.get('password')?.dirty && loginForm.get('password')?.hasError('minlength')">
-                password is <strong>5 chars min</strong>
-              </mat-error>
-        </div>
+      <div class="mb-4">
+        <label for="lastname" class="block text-gray-600">Nom</label>
+        <input matInput placeholder="Doe" required type="text" id="lastname" name="lastname"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+          autocomplete="off" minlength="2" formControlName="lastname">
 
-        <!-- Phone Input -->
-        <div class="mb-4">
-            <label for="phone" class="block text-gray-600">Phone</label>
-            <input matInput required type="text" id="phone" name="phone" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" 
-            autocomplete="off" placeholder="Phone (ex: 0612345678)" formControlName="phone">
-            <mat-error *ngIf="loginForm.get('phone')?.dirty && loginForm.get('phone')?.hasError('required')">
-                Phone is <strong>required</strong>
-              </mat-error>
-              <mat-error *ngIf="loginForm.get('phone')?.dirty && loginForm.get('phone')?.hasError('pattern')">
-                Phone number must be <strong>a french number : +336********</strong>
-              </mat-error>
-        </div>
-        <!-- Register Button -->
-        <button type="submit" 
-                class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">
-                Register
-        </button>
-        <div *ngIf="registerError" class="text-red-500"><strong> Il reste des erreurs OU l'adresse mail à déjà été utilisé</strong></div>
+        <span class="min-h-32">
+          &nbsp;
+          <mat-error class="select-none"
+            *ngIf="loginForm.get('lastname')?.dirty && loginForm.get('lastname')?.hasError('required')">
+            Le nom est <strong>obligatoire</strong>
+          </mat-error>
+          <mat-error class="select-none"
+            *ngIf="loginForm.get('lastname')?.dirty && loginForm.get('lastname')?.hasError('minlength')">
+            Le nom doit faire un minimum de <strong>deux caractères</strong>
+          </mat-error>
+        </span>
+
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="block text-gray-600">Email</label>
+        <input matInput placeholder="john.doe@mail.com" required type="text" id="email" name="email"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+          autocomplete="off" formControlName="email">
+
+        <span class="min-h-32">
+          &nbsp;
+          <mat-error class="select-none"
+            *ngIf="loginForm.get('email')?.dirty && loginForm.get('email')?.hasError('required')">
+            L'email est <strong>obligatoire</strong>
+          </mat-error>
+          <mat-error class="select-none"
+            *ngIf="loginForm.get('email')?.dirty && !loginForm.get('email')?.hasError('required') && loginForm.get('email')?.hasError('email')">
+            L'email est invalide <strong>(ex: nom.prenom@mail.com)</strong>
+          </mat-error>
+        </span>
+
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="block text-gray-600">Mot de passe</label>
+        <input matInput minlength="2" required type="password" placeholder="•••••••••" id="password" name="password"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+          autocomplete="off" formControlName="password">
+
+        <span class="min-h-32">
+          &nbsp;
+          <mat-error class="select-none"
+            *ngIf="loginForm.get('password')?.dirty && loginForm.get('password')?.hasError('required')">
+            Le mot de passe est <strong>requis</strong>
+          </mat-error>
+          <mat-error class="select-none"
+            *ngIf="loginForm.get('password')?.dirty && loginForm.get('password')?.hasError('minlength')">
+            Le mot de passe doit faire <strong>5 caractères</strong> minimum
+          </mat-error>
+        </span>
+
+      </div>
+
+      <div class="mb-4">
+        <label for="phone" class="block text-gray-600">Téléphone</label>
+        <input matInput required type="text" id="phone" name="phone"
+          class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+          autocomplete="off" placeholder="0612345678" formControlName="phone">
+
+        <span class="min-h-32">
+          &nbsp;
+          <mat-error class="select-none"
+            *ngIf="loginForm.get('phone')?.dirty && loginForm.get('phone')?.hasError('required')">
+            Le numéro de téléphone est <strong>obligatoire</strong>
+          </mat-error>
+          <mat-error class="select-none"
+            *ngIf="loginForm.get('phone')?.dirty && loginForm.get('phone')?.hasError('pattern')">
+            Le numéro de téléphone doit suivre le format français <strong> (+336********)</strong>
+          </mat-error>
+        </span>
+      </div>
+
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">
+        Créer un compte
+      </button>
+
+      <div *ngIf="registerError" class="text-red-500"><strong>Il reste des erreurs OU l'adresse mail à déjà été
+          utilisée</strong></div>
     </form>
-    <!-- Login  Link -->
+
     <div class="mt-6 text-blue-500 text-center">
-        <a href="/login" class="hover:underline">Login Here</a>
+      <a href="/login" class="hover:underline">J'ai déjà un compte, me connecter !</a>
     </div>
-    </div>
-    </div>
+  </div>
+</div>
