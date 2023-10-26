@@ -14,6 +14,7 @@ import {
   filter,
   map,
   mergeMap,
+  switchMap,
 } from 'rxjs/operators';
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
@@ -21,6 +22,8 @@ import { IdEntity } from "./entities/id.entity";
 
 @Injectable()
 export class UserService {
+  
+  
 
   // private property to store all user
 
@@ -74,20 +77,20 @@ export class UserService {
    * @param user
    * @returns {Observable<UserEntity>}
    */
-  create = (user: CreateUserDto): Observable<UserEntity> =>
-    this._userDao.save(user).pipe(
-      catchError((e) =>
-        e.code === 11000
-          ? throwError(
-            () =>
-              new ConflictException(
-                'A user with a similar email and content already exists',
-              ),
-          )
-          : throwError(() => new UnprocessableEntityException(e.message)),
-      ),
-      mergeMap((userCreated) => of(new UserEntity(userCreated))),
-    );
+  create = (user: CreateUserDto): Observable<IdEntity> =>
+
+
+  this._userDao.findByEmail(user.email).pipe(
+    mergeMap((userCreated) => {
+      if (!userCreated) {
+        return this._userDao.save(user).pipe(
+          map(userCreated => new IdEntity(userCreated._id)),
+        );
+      }
+      return throwError(() => new NotFoundException(`User with email '${user.email}' already exists`));
+     }));
+
+
 
   /**
    * Updates a user's information with id 
@@ -155,5 +158,28 @@ export class UserService {
         return of(new IdEntity(user));
       }),
     );
+
+     /**
+     * Returns one user firstname of the list matching id in parameter
+     *
+     * @param {string} id of the user
+     *
+     * @returns {Observable<UserEntity>}
+     */
+    findFirstnameById(id: string): Observable<string> {
+      return this._userDao.findById(id).pipe(
+        mergeMap((user) => {
+          if (!!user) {
+            return of(user.firstname);
+          } else {
+            return throwError(
+              () => new NotFoundException(`User with id '${id}' not found`)
+            );
+          }
+        }),
+        catchError((e) => throwError(() => new UnprocessableEntityException(e.message))
+        )
+      );
+    }
 
 }

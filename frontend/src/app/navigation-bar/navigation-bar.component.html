@@ -5,15 +5,15 @@
     <nav class="space-x-6">
         <ul class="list-none p-0 m-0 mr-4 flex flex-row items-center">
             <!-- Afficher le nom d'utilisateur si connecté -->
-            <li class="inline">
+            <li class="inline" *ngIf="!authService.isConnected">
                 <a ng-reflect-router-link="/login" href="/login" class="font-bold no-underline hover:underline hover:text-highlight mr-2 items-center flex">
                     Se connecter&nbsp;<ng-icon size="25" name="heroUserCircle" class="mr-1"></ng-icon>
                 </a>
             </li>
             <!-- N'afficher que si on est pa connecté -->
-            <li class="inline">
-                <a href="#" class="font-bold no-underline hover:underline hover:text-highlight flex items-center">
-                    <ng-icon size="25" name="heroArrowRightOnRectangle"></ng-icon>
+            <li class="inline" *ngIf="authService.isConnected">
+                <a  href="#" class="font-bold no-underline hover:underline hover:text-highlight flex items-center">
+                    Bonjour, {{ authService.userFn }}<ng-icon size="25" name="heroArrowRightOnRectangle"></ng-icon>
                 </a>
             </li>
         </ul>

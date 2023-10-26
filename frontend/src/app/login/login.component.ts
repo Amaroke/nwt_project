@@ -1,8 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { UserService } from '../shared/services/user.service';
-import { catchError, tap } from 'rxjs';
+import { Observable, catchError, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { User } from '../shared/types/user.type';
+import { AuthService } from '../shared/services/auth.service';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-login',
@@ -10,17 +14,28 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: []
 })
 export class LoginComponent {
-  @ViewChild('loginForm', { static: false }) loginForm!: NgForm;
+ 
+  loginError: boolean = false;
+  loginForm: FormGroup;
+  constructor(private authService: AuthService,private _router: Router,private readonly _userService: UserService) {
+    this.loginForm = new FormGroup({
+      email: new FormControl(''),
+      password: new FormControl(''),
+    });
+   }
 
-  constructor(private readonly _userService: UserService) { }
-
-  onSubmit(form: NgForm) {
-    console.log(form.value.email, form.value.password);
-
-    this._userService.loginUser(form.value.email, form.value.password)
+  onSubmit(loginForm: NgForm) {
+    this.loginError = false;
+    this._userService.loginUser(loginForm.value.email, loginForm.value.password)
       .subscribe(
-        (response: string) => {
+        (response:any) => {
+          const userId = response.id;
+          this.authService.login(userId,loginForm.value.email)// a remplacer par le Firstname
+          this._router.navigate(['/home/'+userId]),
           console.log('Réponse du backend :', response);
+        },
+        (error: any) => {
+          this.loginError = true; // Définissez la variable d'erreur en cas d'erreur de connexion
         }
       );
   }

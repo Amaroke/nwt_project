@@ -6,39 +6,78 @@
     <!-- Right: Register Form -->
     <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
     <h1 class="text-2xl font-semibold mb-4">Register</h1>
-    <form novalidate [formGroup]="form">
+    <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm)" novalidate>
 
         <!-- Firstname Input -->
         <div class="mb-4">
             <label for="firstname" class="block text-gray-600">Firstname</label>
-            <input formControlName="firstname" type="text" id="firstname" name="firstname" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" autocomplete="off">
+            <input matInput placeholder="First name" required type="text" id="firstname" name="firstname" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" 
+            autocomplete="off" minlength="2" formControlName="firstname" >
+            <mat-error *ngIf="loginForm.get('firstname')?.dirty && loginForm.get('firstname')?.hasError('required')">
+                First name is <strong>required</strong>
+              </mat-error>
+            <mat-error *ngIf="loginForm.get('firstname')?.dirty && loginForm.get('firstname')?.hasError('minlength')">
+                First name is <strong>2 chars min</strong>
+            </mat-error>
         </div>
 
         <!-- Lastname Input -->
         <div class="mb-4">
             <label for="lastname" class="block text-gray-600">Lastname</label>
-            <input  formControlName="lastname" type="text" id="lastname" name="lastname" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" autocomplete="off">
+            <input matInput  placeholder="last name" required  type="text" id="lastname" name="lastname" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+            autocomplete="off" minlength="2" formControlName="lastname">
+            <mat-error *ngIf="loginForm.get('lastname')?.dirty && loginForm.get('lastname')?.hasError('required')">
+                Last name is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('lastname')?.dirty && loginForm.get('lastname')?.hasError('minlength')">
+                Last name is <strong>2 chars min</strong>
+              </mat-error>
         </div>
 
         
         <!-- Email Input -->
         <div class="mb-4">
-        <label for="email" class="block text-gray-600">Email</label>
-        <input formControlName="email" type="text" id="email" name="email" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" autocomplete="off">
+            <label for="email" class="block text-gray-600">Email</label>
+            <input matInput placeholder="Email" required type="text" id="email" name="email" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" 
+            autocomplete="off" formControlName="email" >
+            <mat-error *ngIf="loginForm.get('email')?.dirty && loginForm.get('email')?.hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('email')?.dirty && !loginForm.get('email')?.hasError('required') && loginForm.get('email')?.hasError('email')">
+                Invalid email <strong>(ex: name.firstname@gmail.com)</strong>
+              </mat-error>
         </div>
         <!-- Password Input -->
         <div class="mb-4">
-        <label for="password" class="block text-gray-600">Password</label>
-        <input  formControlName="password" type="password" id="password" name="password" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" autocomplete="off">
+            <label for="password" class="block text-gray-600">Password</label>
+            <input matInput minlength="2" required type="password" id="password" name="password" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" 
+            autocomplete="off" formControlName="password" >
+            <mat-error *ngIf="loginForm.get('password')?.dirty && loginForm.get('password')?.hasError('required')">
+                password is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('password')?.dirty && loginForm.get('password')?.hasError('minlength')">
+                password is <strong>5 chars min</strong>
+              </mat-error>
         </div>
 
         <!-- Phone Input -->
         <div class="mb-4">
             <label for="phone" class="block text-gray-600">Phone</label>
-            <input formControlName="phone" type="text" id="phone" name="phone" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" autocomplete="off">
+            <input matInput required type="text" id="phone" name="phone" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" 
+            autocomplete="off" placeholder="Phone (ex: 0612345678)" formControlName="phone">
+            <mat-error *ngIf="loginForm.get('phone')?.dirty && loginForm.get('phone')?.hasError('required')">
+                Phone is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('phone')?.dirty && loginForm.get('phone')?.hasError('pattern')">
+                Phone number must be <strong>a french number : +336********</strong>
+              </mat-error>
         </div>
         <!-- Register Button -->
-        <button (click)="submit(form.value)" type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">Register</button>
+        <button type="submit" 
+                class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">
+                Register
+        </button>
+        <div *ngIf="registerError" class="text-red-500"><strong> Il reste des erreurs OU l'adresse mail à déjà été utilisé</strong></div>
     </form>
     <!-- Login  Link -->
     <div class="mt-6 text-blue-500 text-center">

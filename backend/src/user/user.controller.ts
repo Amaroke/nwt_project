@@ -82,7 +82,7 @@ export class UserController {
   @ApiResponse({ status: 201, type: UserEntity, description: 'Utilisateur créée avec succès' })
   @ApiResponse({ status: 400, description: 'Mauvaise demande' })
   @Post()
-  create(@Body() createUserDto: CreateUserDto): Observable<UserEntity> {
+  create(@Body() createUserDto: CreateUserDto): Observable<IdEntity> {
     return this._userService.create(createUserDto);
   }
 
@@ -130,5 +130,52 @@ export class UserController {
   @Put('/login')
   login(@Body() loginData: LoginDto): Observable<IdEntity> {
     return this._userService.login(loginData.email, loginData.password);
+  }
+
+  @ApiOperation({ summary: 'Enregistre un nouveau utilisateur' })
+  @ApiBody({ type: CreateUserDto, description: 'Données du nouveau utilisateur' })
+  @ApiResponse({ status: 201, type: UserEntity, description: 'Utilisateur créée avec succès' })
+  @ApiResponse({ status: 400, description: 'Mauvaise demande' })
+  @Post('/register')
+  register(@Body() registerData: CreateUserDto): Observable<IdEntity> {
+    return this._userService.create(registerData);
+  }
+
+
+
+
+  /**
+   * Handler to answer to GET /user/firstname/:id route
+   *
+   * @param {HandlerParams} params list of route params to take user fisrtname
+   *
+   * @returns Observable<UserEntity>
+   */
+  @ApiOkResponse({
+    status: 200,
+    description: 'Recupère l\'utilisateur firstname selon l\'ID',
+    type: UserEntity,
+  })
+  @ApiNotFoundResponse({
+    status: 404,
+    description: 'L\'utilisateur avec cette l\'ID n\'existe pas dans la BDD  ',
+  })
+  @ApiUnprocessableEntityResponse({
+    status: 500,
+    description: "La requête ne peut pas être effectuer sur la BDD",
+  })
+  @ApiBadRequestResponse({
+    status: 400,
+    description: 'Le paramètre fourni n\'est pas bon'
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Identifiant unique de l\'utilisateur dans la BDD',
+    type: String,
+    allowEmptyValue: false,
+  })
+  @Get('/firstname/:id')
+  findFirstnameById(@Param() params: HandlerParams): Observable<string> {
+    return this._userService.findFirstnameById(params.id);
   }
 }

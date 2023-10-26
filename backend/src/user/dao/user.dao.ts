@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { filter, from, map, Observable } from 'rxjs';
+import { filter, from, map, mergeMap, Observable } from 'rxjs';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { User } from '../schemas/user.schema';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -9,6 +9,7 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 
 @Injectable()
 export class UserDao {
+  
 
   /**
  * Class constructor
@@ -51,6 +52,7 @@ export class UserDao {
   findByEmail = (email: string): Observable<User | void> =>
     from(this._userModel.findOne({ email }));
 
+
   /**
      * Save a new user to the database
      *
@@ -91,3 +93,4 @@ export class UserDao {
   findByIdAndRemove = (id: string): Observable<User | void> =>
     from(this._userModel.findByIdAndRemove(id));
 }
+

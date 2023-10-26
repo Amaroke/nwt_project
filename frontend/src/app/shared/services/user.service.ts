@@ -41,5 +41,12 @@ export class UserService {
     return this._http.put<string>(`${this._apiUrl}/users/login`, loginData);
   }
 
+  registerUser(firstname: string,lastname: string,email: string,password: string, phone: string): Observable<string> {
+    const loginData = { firstname,lastname,email, password,phone };
+    return this._http.post<string>(`${this._apiUrl}/users/register`, loginData);
+  }
 
+  getUserFirstName(id:string): Observable<string> {
+    return this._http.get<string>(`${this._apiUrl}/users/firstname/${id}`);
+  }
 }
