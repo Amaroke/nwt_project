@@ -4,6 +4,7 @@ import { User } from "../schemas/user.schema";
 
 @Exclude()
 export class IdEntity {
+
     @ApiProperty({
         name: 'id',
         description: 'Unique identifier in the database',
@@ -13,6 +14,15 @@ export class IdEntity {
     @Type(() => String)
     id: string;
 
+    @ApiProperty({
+        name: 'firstName',
+        description: 'First name of the user',
+        example: 'John',
+    })
+    @Expose()
+    @Type(() => String)
+    firstname: string;
+
     /**
      * Class constructor
      *
@@ -20,5 +30,6 @@ export class IdEntity {
      */
     constructor(partial: Partial<User>) {
         this.id = partial._id?.toString();
+        this.firstname = partial.firstname;
     }
 }

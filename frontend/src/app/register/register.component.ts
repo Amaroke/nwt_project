@@ -39,8 +39,8 @@ export class RegisterComponent {
       form.value.phone
     ).subscribe({
       next: (response: any) => {
-        const userId = response.id;
-        localStorage.setItem('userId', userId);
+        localStorage.setItem('userId', response.id);
+        localStorage.setItem('userFirstName', response.firstname);
         this._router.navigate(['/home']);
       },
       error: (_: any) => {

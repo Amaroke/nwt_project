@@ -27,14 +27,15 @@ export class LoginComponent {
     this.loginError = false;
     this._userService.loginUser(loginForm.value.email, loginForm.value.password)
       .subscribe(
-        (response: any) => {
-          const userId = response.id;
-          localStorage.setItem('userId', userId);
-          this._router.navigate(['/home/' + userId]),
-            console.log('Réponse du backend :', response);
-        },
-        (error: any) => {
-          this.loginError = true; // Définissez la variable d'erreur en cas d'erreur de connexion
+        {
+          next: (response: any) => {
+            localStorage.setItem('userId', response.id);
+            localStorage.setItem('userFirstName', response.firstname);
+            this._router.navigate(['/home']);
+          },
+          error: (_: any) => {
+            this.loginError = true;
+          }
         }
       );
   }

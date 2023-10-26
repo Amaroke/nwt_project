@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import {Exclude,Expose,Type} from "@nestjs/class-transformer";
+import { Exclude, Expose, Type } from "@nestjs/class-transformer";
 import { User } from "../schemas/user.schema";
 import { ArrayUnique } from "class-validator";
 
@@ -36,7 +36,7 @@ export class UserEntity {
     name: 'email',
     description: 'Email',
     example: 'Mclaughlin.Cochran@undefined.com',
-    uniqueItems:true,
+    uniqueItems: true,
   })
   @Expose()
   @Type(() => String)

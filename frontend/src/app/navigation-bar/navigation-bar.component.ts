@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/services/user.service';
 
 @Component({
@@ -6,18 +6,23 @@ import { UserService } from '../shared/services/user.service';
   templateUrl: './navigation-bar.component.html',
   styleUrls: []
 })
-export class NavigationBarComponent {
+export class NavigationBarComponent implements OnInit {
+  connectUser: any = localStorage.getItem('userFirstName');
 
-  connectUser: any = localStorage.getItem('userId');
+  constructor(public userService: UserService) { }
 
-  constructor(public userService: UserService) {
-
+  ngOnInit() {
+    setInterval(() => {
+      const newValue = localStorage.getItem('userFirstName');
+      if (newValue !== this.connectUser) {
+        this.connectUser = newValue;
+      }
+    }, 1000);
   }
 
   logout() {
-    localStorage.removeItem('userId');
+    localStorage.setItem('userFirstName', '');
+    localStorage.setItem('userId', '');
     this.connectUser = null;
   }
-
-
 }

@@ -106,7 +106,6 @@ export class UserController {
     return this._userService.delete(params.id);
   }
 
-
   /**
     * Handler to answer to POST /login route with email and password in the request body
     *
@@ -139,43 +138,5 @@ export class UserController {
   @Post('/register')
   register(@Body() registerData: CreateUserDto): Observable<IdEntity> {
     return this._userService.create(registerData);
-  }
-
-
-
-
-  /**
-   * Handler to answer to GET /user/firstname/:id route
-   *
-   * @param {HandlerParams} params list of route params to take user fisrtname
-   *
-   * @returns Observable<UserEntity>
-   */
-  @ApiOkResponse({
-    status: 200,
-    description: 'Recupère l\'utilisateur firstname selon l\'ID',
-    type: UserEntity,
-  })
-  @ApiNotFoundResponse({
-    status: 404,
-    description: 'L\'utilisateur avec cette l\'ID n\'existe pas dans la BDD  ',
-  })
-  @ApiUnprocessableEntityResponse({
-    status: 500,
-    description: "La requête ne peut pas être effectuer sur la BDD",
-  })
-  @ApiBadRequestResponse({
-    status: 400,
-    description: 'Le paramètre fourni n\'est pas bon'
-  })
-  @ApiParam({
-    name: 'id',
-    description: 'Identifiant unique de l\'utilisateur dans la BDD',
-    type: String,
-    allowEmptyValue: false,
-  })
-  @Get('/firstname/:id')
-  findFirstnameById(@Param() params: HandlerParams): Observable<string> {
-    return this._userService.findFirstnameById(params.id);
   }
 }

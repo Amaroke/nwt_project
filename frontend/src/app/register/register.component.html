@@ -1,13 +1,12 @@
 <div class="bg-gray-100 flex justify-center items-center h-full -mt-14">
 
   <div class="w-1/2 hidden lg:block">
-    <img
-      src="https://img.freepik.com/vecteurs-libre/neon-realiste-rejoignez-nous-lettrage_23-2148948795.jpg?w=740&t=st=1698330377~exp=1698330977~hmac=9c8b0838f6be46b5959d6f89238ce476751e129f01b0c7f5bd2135f8eefb42b8"
-      alt="Placeholder Image" class="w-full h-screen">
+    <img src="https://i.imgur.com/ojaUKcy.jpeg" alt="Placeholder Image" class="w-full h-screen">
   </div>
 
   <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2 h-screen -mt-32 -mt-bot-32">
     <h1 class="font-bold mb-4 text-center">S'inscrire</h1>
+
     <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm)" novalidate>
 
       <div class="mb-4">
@@ -48,7 +47,6 @@
         </span>
 
       </div>
-
       <div class="mb-4">
         <label for="email" class="block text-gray-600">Email</label>
         <input matInput placeholder="john.doe@mail.com" required type="text" id="email" name="email"
@@ -66,7 +64,6 @@
             L'email est invalide <strong>(ex: nom.prenom@mail.com)</strong>
           </mat-error>
         </span>
-
       </div>
 
       <div class="mb-4">
@@ -86,7 +83,6 @@
             Le mot de passe doit faire <strong>5 caractères</strong> minimum
           </mat-error>
         </span>
-
       </div>
 
       <div class="mb-4">
@@ -112,7 +108,7 @@
         Créer un compte
       </button>
 
-      <div *ngIf="registerError" class="text-red-500"><strong>Il reste des erreurs OU l'adresse mail à déjà été
+      <div *ngIf="registerError" class="text-red-500"><strong>Il reste des erreurs ou l'adresse mail à déjà été
           utilisée</strong></div>
     </form>
 

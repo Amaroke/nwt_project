@@ -13,4 +13,4 @@ import { UserDao } from './dao/user.dao';
   controllers: [UserController],
   providers: [UserService, Logger, UserDao],
 })
-export class UserModule {}
+export class UserModule { }

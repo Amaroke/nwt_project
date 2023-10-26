@@ -1,5 +1,4 @@
 import { Observable, of, throwError } from "rxjs";
-import { User } from "./schemas/user.schema";
 import {
   ConflictException,
   Injectable,
@@ -22,19 +21,13 @@ import { IdEntity } from "./entities/id.entity";
 
 @Injectable()
 export class UserService {
-  
-  
-
-  // private property to store all user
 
   /**
    * Class constructor
    *
    * @param {UserDao} _userDao instance of the DAO
    */
-  constructor(private readonly _userDao: UserDao) {
-  }
-
+  constructor(private readonly _userDao: UserDao) { }
 
   /**
    * Returns all existing user in the list
@@ -50,12 +43,12 @@ export class UserService {
 
 
   /**
- * Returns one user of the list matching id in parameter
- *
- * @param {string} id of the user
- *
- * @returns {Observable<UserEntity>}
- */
+   * Returns one user of the list matching id in parameter
+   *
+   * @param {string} id of the user
+   *
+   * @returns {Observable<UserEntity>}
+   */
   findOne = (id: string): Observable<UserEntity> =>
     this._userDao.findById(id).pipe(
       mergeMap((user) => {
@@ -78,18 +71,15 @@ export class UserService {
    * @returns {Observable<UserEntity>}
    */
   create = (user: CreateUserDto): Observable<IdEntity> =>
-
-
-  this._userDao.findByEmail(user.email).pipe(
-    mergeMap((userCreated) => {
-      if (!userCreated) {
-        return this._userDao.save(user).pipe(
-          map(userCreated => new IdEntity(userCreated._id)),
-        );
-      }
-      return throwError(() => new NotFoundException(`User with email '${user.email}' already exists`));
-     }));
-
+    this._userDao.findByEmail(user.email).pipe(
+      mergeMap((userCreated) => {
+        if (!userCreated) {
+          return this._userDao.save(user).pipe(
+            map(userCreated => new IdEntity(userCreated._id)),
+          );
+        }
+        return throwError(() => new NotFoundException(`User with email '${user.email}' already exists`));
+      }));
 
 
   /**
@@ -158,28 +148,4 @@ export class UserService {
         return of(new IdEntity(user));
       }),
     );
-
-     /**
-     * Returns one user firstname of the list matching id in parameter
-     *
-     * @param {string} id of the user
-     *
-     * @returns {Observable<UserEntity>}
-     */
-    findFirstnameById(id: string): Observable<string> {
-      return this._userDao.findById(id).pipe(
-        mergeMap((user) => {
-          if (!!user) {
-            return of(user.firstname);
-          } else {
-            return throwError(
-              () => new NotFoundException(`User with id '${id}' not found`)
-            );
-          }
-        }),
-        catchError((e) => throwError(() => new UnprocessableEntityException(e.message))
-        )
-      );
-    }
-
 }

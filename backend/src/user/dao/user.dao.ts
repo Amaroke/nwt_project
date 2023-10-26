@@ -9,7 +9,7 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 
 @Injectable()
 export class UserDao {
-  
+
 
   /**
  * Class constructor
