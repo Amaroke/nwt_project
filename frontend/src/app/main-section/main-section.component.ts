@@ -11,11 +11,13 @@ import { Question } from '../shared/types/question.type';
 export class MainSectionComponent implements OnInit {
 
   private _questions: Question[];
+  private _questionsSelected: Question[];
 
   constructor(
     private _questionService: QuestionService,
   ) {
     this._questions = [] as Question[];
+    this._questionsSelected = [] as Question[];
   }
 
   ngOnInit(): void {
@@ -26,6 +28,10 @@ export class MainSectionComponent implements OnInit {
 
   get questions(): Question[] {
     return this._questions;
+  }
+
+  get questionsSelected(): Question[] {
+    return this._questionsSelected;
   }
 
 }

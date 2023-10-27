@@ -1,5 +1,5 @@
-import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { IsNotEmpty, IsString, IsOptional, IsArray } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdateQuestionDto {
     @ApiPropertyOptional({
@@ -21,5 +21,14 @@ export class UpdateQuestionDto {
     @IsString()
     @IsNotEmpty()
     content?: string;
+
+    @ApiProperty({
+        name: 'answers',
+        description: 'Answers of the question',
+        example: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C#', 'PHP', 'C/C++', 'Ruby', 'Go', 'Other'],
+    })
+    @IsArray()
+    @IsNotEmpty()
+    answers: Array<string>;
 
 }

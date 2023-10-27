@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsInt, IsDate, } from 'class-validator';
+import { IsNotEmpty, IsString, IsInt, IsDate, IsArray, } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateQuestionDto {
@@ -21,6 +21,15 @@ export class CreateQuestionDto {
     content: string;
 
     @ApiProperty({
+        name: 'answers',
+        description: 'Answers of the question',
+        example: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C#', 'PHP', 'C/C++', 'Ruby', 'Go', 'Other'],
+    })
+    @IsArray()
+    @IsNotEmpty()
+    answers: Array<string>;
+
+    @ApiProperty({
         name: 'type',
         description: 'Type of the question (e.g., 1, 2, 3, 4, etc.)',
         example: 1,
@@ -34,7 +43,7 @@ export class CreateQuestionDto {
         description: 'ID of the question owner',
         example: '0123456789',
     })
-    @IsInt()
+    @IsString()
     @IsNotEmpty()
-    owner: number;
+    owner: string;
 }

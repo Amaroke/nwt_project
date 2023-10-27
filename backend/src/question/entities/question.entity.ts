@@ -32,6 +32,15 @@ export class QuestionEntity {
     content: string;
 
     @ApiProperty({
+        name: 'answers',
+        description: 'Answers of the question',
+        example: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C#', 'PHP', 'C/C++', 'Ruby', 'Go', 'Other'],
+    })
+    @Expose()
+    @Type(() => Array<String>)
+    answers: Array<string>;
+
+    @ApiProperty({
         name: 'type',
         description: 'Type of the question (e.g., 1, 2, 3, 4, etc.)',
         example: 1,
@@ -43,11 +52,11 @@ export class QuestionEntity {
     @ApiProperty({
         name: 'owner',
         description: 'ID of the question owner',
-        example: '0123456789',
+        example: '653aa2bcca9e0505649b2dd2',
     })
     @Expose()
-    @Type(() => Number)
-    owner: number;
+    @Type(() => String)
+    owner: string;
 
     @ApiProperty({
         name: 'date',
@@ -67,6 +76,7 @@ export class QuestionEntity {
         this.id = partial._id?.toString();
         this.title = partial.title;
         this.content = partial.content;
+        this.answers = partial.answers;
         this.type = partial.type;
         this.owner = partial.owner;
         this.date = partial.date;

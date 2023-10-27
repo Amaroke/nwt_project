@@ -1,67 +1,19 @@
-<div class="center-section -mt-2 mb-16 md:mx-0 mx-2 h-full top-14">
+<div class="center-section mt-16 mb-16 md:mx-0 mx-2 top-16">
     <ul>
-        <li *ngFor="let question of questions" class="bg-background text-font p-4 rounded-lg shadow-md mt-4">
+        <li *ngFor="let question of questions" [class.bg-blue-100]="isSelected(question)"
+            [class.bg-slate-50]="!isSelected(question)" class="bg-background text-font p-4 rounded-lg shadow-md mt-4"
+            (click)="toggleSelection(question)">
             <div class="flex flex-col justify-between h-full">
                 <div class="mb-4">
                     <h2 class="text-xl font-semibold">{{ question.title }}</h2>
                     <p class="mb-2">{{ question.content }}</p>
-                    <p class="mb-2">Auteur : {{ question.owner }}</p>
-                    <p>Date : {{ question.date | date:'d/M' }}</p>
-                </div>
-                <div class="flex items-center w-90">
-                    <p class="font-semibold p-2">Type : {{ question.type }}</p>
-                </div>
-            </div>
-        </li>
-        <li *ngFor="let question of questions" class="bg-background text-font p-4 rounded-lg shadow-md mt-4">
-            <div class="flex flex-col justify-between h-full">
-                <div class="mb-4">
-                    <h2 class="text-xl font-semibold">{{ question.title }}</h2>
-                    <p class="mb-2">{{ question.content }}</p>
-                    <p class="mb-2">Auteur : {{ question.owner }}</p>
-                    <p>Date : {{ question.date | date:'d/M' }}</p>
-                </div>
-                <div class="flex items-center w-90">
-                    <p class="font-semibold p-2">Type : {{ question.type }}</p>
-                </div>
-            </div>
-        </li>
-        <li *ngFor="let question of questions" class="bg-background text-font p-4 rounded-lg shadow-md mt-4">
-            <div class="flex flex-col justify-between h-full">
-                <div class="mb-4">
-                    <h2 class="text-xl font-semibold">{{ question.title }}</h2>
-                    <p class="mb-2">{{ question.content }}</p>
-                    <p class="mb-2">Auteur : {{ question.owner }}</p>
-                    <p>Date : {{ question.date | date:'d/M' }}</p>
-                </div>
-                <div class="flex items-center w-90">
-                    <p class="font-semibold p-2">Type : {{ question.type }}</p>
-                </div>
-            </div>
-        </li>
-        <li *ngFor="let question of questions" class="bg-background text-font p-4 rounded-lg shadow-md mt-4">
-            <div class="flex flex-col justify-between h-full">
-                <div class="mb-4">
-                    <h2 class="text-xl font-semibold">{{ question.title }}</h2>
-                    <p class="mb-2">{{ question.content }}</p>
-                    <p class="mb-2">Auteur : {{ question.owner }}</p>
-                    <p>Date : {{ question.date | date:'d/M' }}</p>
-                </div>
-                <div class="flex items-center w-90">
-                    <p class="font-semibold p-2">Type : {{ question.type }}</p>
-                </div>
-            </div>
-        </li>
-        <li *ngFor="let question of questions" class="bg-background text-font p-4 rounded-lg shadow-md mt-4">
-            <div class="flex flex-col justify-between h-full">
-                <div class="mb-4">
-                    <h2 class="text-xl font-semibold">{{ question.title }}</h2>
-                    <p class="mb-2">{{ question.content }}</p>
-                    <p class="mb-2">Auteur : {{ question.owner }}</p>
-                    <p>Date : {{ question.date | date:'d/M' }}</p>
-                </div>
-                <div class="flex items-center w-90">
-                    <p class="font-semibold p-2">Type : {{ question.type }}</p>
+                    <p class="font-bold">• {{ questionTypes[question.type - 1] }}</p>
+                    <ul *ngIf="question.type - 1 == 0">
+                        Réponses :
+                        <li *ngFor="let answer of question.answers" class="mb-1">
+                            &nbsp;&nbsp;- {{ answer }}
+                        </li>
+                    </ul>
                 </div>
             </div>
         </li>

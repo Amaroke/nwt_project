@@ -8,9 +8,23 @@ import { Question } from '../shared/types/question.type';
 })
 export class ListSectionComponent {
   @Input() questions: Question[];
+  @Input() questionsSelected: Question[];
+  questionTypes = ["Question choix multiples", "Question Vrai/faux", "Question à réponse textuelle"];
 
   constructor() {
     this.questions = [];
+    this.questionsSelected = [];
   }
 
+  toggleSelection(question: Question): void {
+    if (this.isSelected(question)) {
+      this.questionsSelected.splice(this.questionsSelected.indexOf(question), 1);
+      return;
+    }
+    this.questionsSelected.push(question)
+  }
+
+  isSelected(question: Question): boolean {
+    return this.questionsSelected.includes(question);
+  }
 }

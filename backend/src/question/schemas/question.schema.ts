@@ -30,16 +30,22 @@ export class Question {
     content: string;
 
     @Prop({
+        type: Array<string>,
+        required: true,
+    })
+    answers: Array<string>;
+
+    @Prop({
         type: Number,
         required: true,
     })
     type: number;
 
     @Prop({
-        type: Number, //TODO: SWAP FOR mongoose.Schema.Types.ObjectId later
+        type: String,
         required: true,
     })
-    owner: number;
+    owner: string;
 
     @Prop({
         type: Date,

@@ -1,19 +1,23 @@
-<div class="bg-background p-8 rounded-lg shadow-md sticky top-16">
+<div class="bg-background p-8 rounded-lg shadow-md sticky top-16 bg-slate-50">
     <div class="mb-4 flex flex-wrap justify-center items-center">
-        <button
-            class="btn btn-primary mb-2 w-full bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-300 text-white px-4 py-2 rounded-lg">Créer
+        <button class="btn btn-primary mb-2 w-full text-white px-4 py-2 rounded-lg"
+            [class.bg-blue-500]="isSelectedNotEmpty()" [class.bg-gray-400]="!isSelectedNotEmpty()"
+            [class.hover:bg-blue-600]="isSelectedNotEmpty()" [disabled]="!isSelectedNotEmpty()">Créer
             un sondage</button>
         <button
-            class="btn btn-success mb-2 w-full bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-300 text-white px-4 py-2 rounded-lg">Ajouter
+            class="btn btn-success mb-2 bg-green-500 hover:bg-green-600 w-full text-white px-4 py-2 rounded-lg">Ajouter
             une question</button>
-        <button
-            class="btn btn-warning mb-2 w-full bg-yellow-500 hover:bg-yellow-600 focus:ring focus:ring-yellow-300 text-white px-4 py-2 rounded-lg">Modifier
+        <button class="btn btn-warning mb-2 w-full text-white px-4 py-2 rounded-lg"
+            [class.bg-yellow-500]="isOneQuestionSelected()" [class.bg-gray-400]="!isOneQuestionSelected()"
+            [class.hover:bg-yellow-600]="isOneQuestionSelected()" [disabled]="!isOneQuestionSelected()">Modifier
             la question</button>
-        <button
-            class="btn btn-danger mb-2 w-full bg-red-500 hover:bg-red-600 focus:ring focus:ring-red-300 text-white px-4 py-2 rounded-lg">Supprimer
+        <button class="btn btn-danger mb-2 w-full text-white px-4 py-2 rounded-lg"
+            [class.bg-red-500]="isOneQuestionSelected()" [class.bg-gray-400]="!isOneQuestionSelected()"
+            [class.hover:bg-red-600]="isOneQuestionSelected()" [disabled]="!isOneQuestionSelected()">Supprimer
             la question</button>
-        <button
-            class="btn btn-secondary w-full bg-gray-300 hover:bg-gray-400 focus:ring focus:ring-gray-300 text-gray-700 px-4 py-2 rounded-lg">Désélectionner
+        <button class="btn btn-secondary w-full text-white px-4 py-2 rounded-lg"
+            [class.bg-slate-800]="isSelectedNotEmpty()" [class.bg-gray-400]="!isSelectedNotEmpty()"
+            [class.hover:bg-slate-900]="isSelectedNotEmpty()" [disabled]="!isSelectedNotEmpty()">Désélectionner
             tout</button>
     </div>
 </div>
