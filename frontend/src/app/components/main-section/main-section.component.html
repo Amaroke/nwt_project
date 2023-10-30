@@ -1,9 +1,13 @@
 <div class="flex">
     <div class="flex-1 hidden md:block w-1/6 p-2 sticky mt-14">
-        <app-search-section (activeTabChange)="changeActiveTab()" [activeTab]="activeTab" />
+        <app-search-section [(searchQuery)]="searchQuery" [(searchDate)]="searchDate" [(searchOwner)]="searchOwner"
+            (activeTabChange)="changeActiveTab()" [activeTab]="activeTab" />
     </div>
     <div class="flex-2 lg:w-1/2">
-        <app-questions-list [questions]="questions" [questionsSelected]="questionsSelected" />
+        <app-questions-list *ngIf="activeTab === 'question'" [searchQuery]="searchQuery" [searchDate]="searchDate"
+            [searchOwner]="searchOwner" [questions]="questions" [questionsSelected]="questionsSelected" />
+        <app-sondages-list *ngIf="activeTab === 'sondage'" [searchQuery]="searchQuery" [searchDate]="searchDate"
+            [searchOwner]="searchOwner" />
     </div>
     <div class="flex-1 hidden md:block w-1/6 p-2 sticky mt-14">
         <app-sondage-crud-section *ngIf="activeTab === 'sondage'" (open)="openPopup()" (openEdit)="openEditPopup()"

@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuestionCreatePopupComponent } from './components/question-create-popup/create-question-popup.component';
 import { QuestionEditPopupComponent } from './components/question-edit-popup/question-edit-popup.component';
 import { SondageCrudSectionComponent } from './components/sondage-crud-section/sondage-crud-section.component';
+import { SondagesListComponent } from './components/sondages-list/sondages-list.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SondageCrudSectionComponent } from './components/sondage-crud-section/s
     RegisterComponent,
     QuestionCreatePopupComponent,
     QuestionEditPopupComponent,
-    SondageCrudSectionComponent
+    SondageCrudSectionComponent,
+    SondagesListComponent
   ],
   imports: [
     BrowserModule,

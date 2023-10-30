@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Question } from '../../shared/types/question.type';
 
 @Component({
-  selector: 'app-questions-list',
-  templateUrl: './questions-list.component.html',
+  selector: 'app-sondages-list',
+  templateUrl: './sondages-list.component.html',
   styleUrls: []
 })
-export class QuestionsListComponent {
+export class SondagesListComponent {
   @Input() questions: Question[];
   @Input() searchQuery: string;
   @Input() searchDate: Date | undefined;
@@ -37,13 +37,6 @@ export class QuestionsListComponent {
 
   getUserConnected(): string | null {
     return localStorage.getItem('userId');
-  }
-
-  isDateBefore(questionDate: Date | undefined): boolean {
-    if (this.searchDate === undefined || questionDate === undefined) {
-      return true;
-    }
-    return new Date(this.searchDate) < new Date(questionDate);
   }
 
 }

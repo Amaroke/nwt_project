@@ -15,6 +15,9 @@ export class MainSectionComponent implements OnInit {
   private _showPopup = false;
   private _showEditPopup = false;
   private _activeTab = 'question';
+  searchQuery: string;
+  searchDate: Date | undefined;
+  searchOwner: boolean;
 
   constructor(
     private _questionService: QuestionService,
@@ -24,6 +27,9 @@ export class MainSectionComponent implements OnInit {
     this._showPopup = false;
     this._showEditPopup = false;
     this._activeTab = 'question';
+    this.searchQuery = '';
+    this.searchDate = undefined;
+    this.searchOwner = false;
   }
 
   ngOnInit(): void {

@@ -1,0 +1,14 @@
+<div class="center-section mt-16 mb-16 md:mx-0 mx-2 top-16">
+    <ul>
+        <li *ngFor="let question of questions" [class.bg-blue-100]="isSelected(question)"
+            [class.bg-slate-50]="!isSelected(question)" class="bg-background text-font p-4 rounded-lg shadow-md mt-4"
+            (click)="toggleSelection(question)">
+            <div *ngIf="!searchOwner || question.owner === getUserConnected()"
+                class="flex flex-col justify-between h-full">
+                <div class="mb-4">
+                    <p>sondage</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
