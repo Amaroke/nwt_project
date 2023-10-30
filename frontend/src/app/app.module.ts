@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QuestionPopupComponent } from './create-question-popup/create-question-popup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ListSectionComponent,
     PostSectionComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    QuestionPopupComponent
   ],
   imports: [
     BrowserModule,

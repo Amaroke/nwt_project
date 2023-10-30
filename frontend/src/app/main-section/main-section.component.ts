@@ -12,12 +12,14 @@ export class MainSectionComponent implements OnInit {
 
   private _questions: Question[];
   private _questionsSelected: Question[];
+  private _showPopup = false;
 
   constructor(
     private _questionService: QuestionService,
   ) {
     this._questions = [] as Question[];
     this._questionsSelected = [] as Question[];
+    this._showPopup = false;
   }
 
   ngOnInit(): void {
@@ -32,6 +34,18 @@ export class MainSectionComponent implements OnInit {
 
   get questionsSelected(): Question[] {
     return this._questionsSelected;
+  }
+
+  get showPopup(): boolean {
+    return this._showPopup;
+  }
+
+  openPopup(): void {
+    this._showPopup = true;
+  }
+
+  closePopup(): void {
+    this._showPopup = false;
   }
 
 }

@@ -1,9 +1,9 @@
 export type Question = {
-    id: string;
+    id?: string;
     title: string;
     content: string;
     answers: Array<string>;
     type: number;
     owner: string;
-    date: Date;
+    date?: Date;
 };

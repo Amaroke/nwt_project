@@ -1,11 +1,13 @@
 <div class="flex">
-    <div class="flex-1 hidden md:block w-1/6 p-2 sticky">
+    <div class="flex-1 hidden md:block w-1/6 p-2 sticky mt-14">
         <app-search-section />
     </div>
     <div class="flex-2 lg:w-1/2">
         <app-list-section [questions]="questions" [questionsSelected]="questionsSelected" />
     </div>
-    <div class="flex-1 hidden md:block w-1/6 p-2 sticky">
-        <app-post-section [questionsSelected]="questionsSelected" />
+    <div class="flex-1 hidden md:block w-1/6 p-2 sticky mt-14">
+        <app-post-section (open)="openPopup()" [questions]="questions" [questionsSelected]="questionsSelected" />
     </div>
+    <app-question-popup [questions]="questions" (close)="closePopup()" *ngIf="showPopup"
+        class="relative"></app-question-popup>
 </div>

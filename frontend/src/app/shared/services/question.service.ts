@@ -31,7 +31,7 @@ export class QuestionService {
     return this._http.put<Question>(`${this._apiUrl}/questions/${id}`, questionData);
   }
 
-  deleteQuestion(id: number): Observable<void> {
+  deleteQuestion(id: string): Observable<void> {
     return this._http.delete<void>(`${this._apiUrl}/questions/${id}`);
   }
 }

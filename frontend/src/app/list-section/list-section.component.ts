@@ -9,7 +9,7 @@ import { Question } from '../shared/types/question.type';
 export class ListSectionComponent {
   @Input() questions: Question[];
   @Input() questionsSelected: Question[];
-  questionTypes = ["Question choix multiples", "Question Vrai/faux", "Question à réponse textuelle"];
+  questionTypes = ["Question à choix multiples", "Question Vrai/faux", "Question à réponse libre"];
 
   constructor() {
     this.questions = [];
