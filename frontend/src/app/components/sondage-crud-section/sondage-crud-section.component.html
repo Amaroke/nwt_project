@@ -1,0 +1,12 @@
+<div class="bg-background p-8 rounded-lg shadow-md sticky top-16 bg-slate-50">
+    <div class="mb-4 flex flex-wrap justify-center items-center">
+        <button (click)="deleteQuestion()" class="btn btn-danger mb-2 w-full text-white px-4 py-2 rounded-lg"
+            [class.bg-red-500]="isDeletable()" [class.bg-gray-400]="!isDeletable()"
+            [class.hover:bg-red-600]="isOneQuestionSelected()" [disabled]="!isDeletable()">Supprimer
+            le sondage</button>
+        <button (click)="unselectAll()" class="btn btn-secondary w-full text-white px-4 py-2 rounded-lg"
+            [class.bg-slate-800]="isSelectedNotEmpty()" [class.bg-gray-400]="!isSelectedNotEmpty()"
+            [class.hover:bg-slate-900]="isSelectedNotEmpty()" [disabled]="!isSelectedNotEmpty()">Exporter le
+            sondage</button>
+    </div>
+</div>

@@ -1,10 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
-import { UserService } from '../shared/services/user.service';
-import { Observable, catchError, tap } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { UserService } from '../../shared/services/user.service';
 import { Router } from '@angular/router';
-import { User } from '../shared/types/user.type';
 import { __values } from 'tslib';
 
 @Component({

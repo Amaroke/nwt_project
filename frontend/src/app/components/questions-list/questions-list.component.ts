@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { Question } from '../shared/types/question.type';
+import { Question } from '../../shared/types/question.type';
 
 @Component({
-  selector: 'app-list-section',
-  templateUrl: './list-section.component.html',
+  selector: 'app-questions-list',
+  templateUrl: './questions-list.component.html',
   styleUrls: []
 })
-export class ListSectionComponent {
+export class QuestionsListComponent {
   @Input() questions: Question[];
   @Input() questionsSelected: Question[];
-  questionTypes = ["Question à choix multiples", "Question Vrai/faux", "Question à réponse libre"];
+  questionTypes = ["Question Vrai/faux", "Question à réponse libre", "Question à choix multiples"];
 
   constructor() {
     this.questions = [];

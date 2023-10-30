@@ -4,6 +4,6 @@ export type Question = {
     content: string;
     answers: Array<string>;
     type: number;
-    owner: string;
+    owner?: string;
     date?: Date;
 };

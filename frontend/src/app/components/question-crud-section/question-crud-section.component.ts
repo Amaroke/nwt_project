@@ -1,17 +1,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Question } from '../shared/types/question.type';
-import { QuestionService } from '../shared/services/question.service';
+import { Question } from '../../shared/types/question.type';
+import { QuestionService } from '../../shared/services/question.service';
 
 @Component({
-  selector: 'app-post-section',
-  templateUrl: './post-section.component.html',
+  selector: 'app-question-crud-section',
+  templateUrl: './question-crud-section.component.html',
   styleUrls: []
 })
-export class PostSectionComponent {
+export class QuestionCrudSectionComponent {
 
   @Input() questionsSelected: Question[];
   @Input() questions: Question[];
   @Output() open = new EventEmitter<void>();
+  @Output() openEdit = new EventEmitter<void>();
 
   constructor(private _questionService: QuestionService) {
     this.questionsSelected = [];
@@ -46,6 +47,10 @@ export class PostSectionComponent {
     this.open.emit();
   }
 
+  openEditPopup(): void {
+    this.openEdit.emit();
+  }
+
   userIsConnected(): boolean {
     return localStorage.getItem('userId') ? true : false;
   }
@@ -54,4 +59,7 @@ export class PostSectionComponent {
     return this.questionsSelected.length > 0 && localStorage.getItem('userId') === this.questionsSelected[0].owner;
   }
 
+  isEditable(): boolean {
+    return this.questionsSelected.length > 0 && localStorage.getItem('userId') === this.questionsSelected[0].owner;
+  }
 }

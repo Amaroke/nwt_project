@@ -1,13 +1,14 @@
-<!-- search.component.html -->
 <div class="bg-background p-6 rounded-lg shadow-md sticky top-16 bg-slate-50">
     <div class="mb-4">
 
         <div class="mb-4 flex space-x-4 items-center">
-            <button (click)="showSearch('question')" [class.active]="activeTab === 'question'">
+            <button [disabled]="activeTab === 'question'" (click)="setActiveTab('question')"
+                [class.font-bold]="activeTab === 'question'">
                 Question
             </button>
             <div class="border-r border-gray-400 h-5 mx-4"></div>
-            <button (click)="showSearch('sondage')" [class.active]="activeTab === 'sondage'">
+            <button [disabled]="activeTab === 'sondage'" (click)="setActiveTab('sondage')"
+                [class.font-bold]="activeTab === 'sondage'">
                 Sondage
             </button>
         </div>
@@ -19,17 +20,11 @@
         </div>
     </div>
     <div class="mb-4 flex items-center">
-        <input type="checkbox" id="favorites" class="mr-2">
-        <label for="favorites">Afficher les favoris</label>
-    </div>
-    <div class="mb-4 flex items-center">
         <input type="checkbox" id="my-activities" class="mr-2">
-        <label for="my-activities">Afficher mes activités</label>
+        <label for="my-activities">Afficher mes {{activeTab}}s</label>
     </div>
     <div class="mb-4 flex flex-col">
-        <label for="start-date" class="mb-1">Date de début:</label>
+        <label for="start-date" class="mb-1">Créée avant le :</label>
         <input type="date" id="start-date" class="w-full px-4 py-2 border rounded-lg">
-        <label for="end-date" class="mb-1">Date de fin:</label>
-        <input type="date" id="end-date" class="w-full px-4 py-2 border rounded-lg">
     </div>
 </div>

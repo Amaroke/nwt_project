@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { QuestionService } from '../shared/services/question.service';
-import { Question } from '../shared/types/question.type';
+import { QuestionService } from '../../shared/services/question.service';
+import { Question } from '../../shared/types/question.type';
 
 @Component({
-  selector: 'app-question-popup',
-  templateUrl: './create-question-popup.component.html',
+  selector: 'app-question-edit-popup',
+  templateUrl: './question-edit-popup.component.html',
   styleUrls: []
 })
-export class QuestionPopupComponent {
+export class QuestionEditPopupComponent {
 
   @Input() question: Question;
   @Input() questions: Question[];
@@ -25,10 +25,12 @@ export class QuestionPopupComponent {
   }
 
   saveQuestion() {
-    this._questionService.createQuestion(this.question).subscribe(() => {
-      this.closePopup();
-      window.location.reload();
-    });
+    if (this.question.id) {
+      this._questionService.updateQuestion(this.question.id, this.question).subscribe(() => {
+        this.closePopup();
+        window.location.reload();
+      });
+    }
   }
 
   closePopup(): void {

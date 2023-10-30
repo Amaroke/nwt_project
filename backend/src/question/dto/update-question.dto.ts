@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsOptional, IsArray } from 'class-validator';
+import { IsNotEmpty, IsString, IsOptional, IsArray, IsInt } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdateQuestionDto {
@@ -21,6 +21,16 @@ export class UpdateQuestionDto {
     @IsString()
     @IsNotEmpty()
     content?: string;
+
+    @ApiPropertyOptional({
+        name: 'type',
+        description: 'Type of the question',
+        example: 0,
+    })
+    @IsOptional()
+    @IsInt()
+    @IsNotEmpty()
+    type?: number;
 
     @ApiProperty({
         name: 'answers',

@@ -24,10 +24,15 @@ export class QuestionService {
   }
 
   createQuestion(questionData: Question): Observable<Question> {
+    delete questionData.id;
+    delete questionData.date;
     return this._http.post<Question>(`${this._apiUrl}/questions`, questionData);
   }
 
-  updateQuestion(id: number, questionData: Question): Observable<Question> {
+  updateQuestion(id: string, questionData: Question): Observable<Question> {
+    delete questionData.id;
+    delete questionData.owner;
+    delete questionData.date;
     return this._http.put<Question>(`${this._apiUrl}/questions/${id}`, questionData);
   }
 

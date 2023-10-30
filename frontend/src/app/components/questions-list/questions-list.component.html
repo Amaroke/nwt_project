@@ -8,7 +8,7 @@
                     <h2 class="text-xl font-semibold">{{ question.title }}</h2>
                     <p class="mb-2">{{ question.content }}</p>
                     <p class="font-bold">• {{ questionTypes[question.type - 1] }}</p>
-                    <ul *ngIf="question.type - 1 == 0">
+                    <ul *ngIf="question.type - 1 == 2">
                         Réponses :
                         <li *ngFor="let answer of question.answers" class="mb-1">
                             &nbsp;&nbsp;- {{ answer }}

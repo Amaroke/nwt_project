@@ -1,20 +1,22 @@
 <div class="bg-background p-8 rounded-lg shadow-md sticky top-16 bg-slate-50">
     <div class="mb-4 flex flex-wrap justify-center items-center">
         <button class="btn btn-primary mb-2 w-full text-white px-4 py-2 rounded-lg"
-            [class.bg-blue-500]="isSelectedNotEmpty()" [class.bg-gray-400]="!isSelectedNotEmpty()"
-            [class.hover:bg-blue-600]="isSelectedNotEmpty()" [disabled]="!isSelectedNotEmpty()">Créer
+            [class.bg-blue-500]="isSelectedNotEmpty() && userIsConnected()"
+            [class.bg-gray-400]="!isSelectedNotEmpty() || !userIsConnected()"
+            [class.hover:bg-blue-600]="isSelectedNotEmpty() && userIsConnected()"
+            [disabled]="!isSelectedNotEmpty() || !userIsConnected()">Créer
             un sondage</button>
         <button (click)="openPopup()" [class.bg-green-500]="userIsConnected()" [class.bg-gray-400]="!userIsConnected()"
             [class.hover:bg-green-600]="userIsConnected()" [disabled]="!userIsConnected()"
             class="btn btn-success mb-2 w-full text-white px-4 py-2 rounded-lg">Ajouter
             une question</button>
-        <button class="btn btn-warning mb-2 w-full text-white px-4 py-2 rounded-lg"
-            [class.bg-yellow-500]="isOneQuestionSelected()" [class.bg-gray-400]="!isOneQuestionSelected()"
-            [class.hover:bg-yellow-600]="isOneQuestionSelected()" [disabled]="!isOneQuestionSelected()">Modifier
+        <button (click)="openEditPopup()" class="btn btn-warning mb-2 w-full text-white px-4 py-2 rounded-lg"
+            [class.bg-yellow-500]="isEditable()" [class.bg-gray-400]="!isEditable()"
+            [class.hover:bg-yellow-600]="isEditable()" [disabled]="!isEditable()">Modifier
             la question</button>
         <button (click)="deleteQuestion()" class="btn btn-danger mb-2 w-full text-white px-4 py-2 rounded-lg"
             [class.bg-red-500]="isDeletable()" [class.bg-gray-400]="!isDeletable()"
-            [class.hover:bg-red-600]="isOneQuestionSelected()" [disabled]="!isDeletable()">Supprimer
+            [class.hover:bg-red-600]="isDeletable()" [disabled]="!isDeletable()">Supprimer
             la question</button>
         <button (click)="unselectAll()" class="btn btn-secondary w-full text-white px-4 py-2 rounded-lg"
             [class.bg-slate-800]="isSelectedNotEmpty()" [class.bg-gray-400]="!isSelectedNotEmpty()"
