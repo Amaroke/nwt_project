@@ -5,13 +5,16 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { config } from 'dotenv';
 import { UserModule } from './user/user.module';
 import { QuestionModule } from './question/question.module';
+import { SurveyModule } from './survey/survey.module';
+
 config();
 
 @Module({
   imports: [
-    UserModule,
     MongooseModule.forRoot(process.env.MONGODB_URI),
+    UserModule,
     QuestionModule,
+    SurveyModule
   ],
   controllers: [AppController],
   providers: [AppService],
