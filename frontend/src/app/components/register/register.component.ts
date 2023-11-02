@@ -40,7 +40,7 @@ export class RegisterComponent {
     ).subscribe({
       next: (response: any) => {
         localStorage.setItem('userId', response.id);
-        localStorage.setItem('userFirstName', response.firstname);
+        localStorage.setItem('userFirstName', form.value.firstname);
         this._router.navigate(['/home']);
       },
       error: (_: any) => {
