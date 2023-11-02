@@ -17,9 +17,9 @@ import { IdEntity } from './entities/id.entity';
 export class UserController {
 
   /**
- * Class constructor
- * @param _userService
- */
+   * Class constructor
+   * @param _userService
+   */
   constructor(private readonly _userService: UserService) { }
 
 
@@ -86,6 +86,12 @@ export class UserController {
     return this._userService.create(createUserDto);
   }
 
+  /**
+   * Handler to answer to PUT /user/:id route
+   * @param params 
+   * @param updateUserDto 
+   * @returns 
+   */
   @ApiOperation({ summary: 'Mettre à jour un utilisateur par ID' })
   @ApiParam({ name: 'id', description: 'ID de l\'utilisateur' })
   @ApiBody({ type: UpdateUserDto, description: "Données de l\'utilisateur mise à jour" })
@@ -97,22 +103,13 @@ export class UserController {
     return this._userService.update(params.id, updateUserDto);
   }
 
-  @ApiOperation({ summary: 'Supprimer un utilisateur par ID' })
-  @ApiParam({ name: 'id', description: 'ID de l\'utilisateur' })
-  @ApiResponse({ status: 204, description: 'Utilisateur supprimée avec succès' })
-  @ApiResponse({ status: 404, description: 'Utilisateur non trouvée' })
-  @Delete(':id')
-  remove(@Param() params: HandlerParams): Observable<void> {
-    return this._userService.delete(params.id);
-  }
-
   /**
-    * Handler to answer to POST /login route with email and password in the request body
-    *
-    * @param {LoginDto} loginData The data containing email and password
-    *
-    * @returns Observable<UserEntity>
-    */
+  * Handler to answer to POST /login route with email and password in the request body
+  *
+  * @param {LoginDto} loginData The data containing email and password
+  *
+  * @returns Observable<UserEntity>
+  */
   @ApiOkResponse({
     status: 200,
     description: 'Connecte l\'utilisateur avec succès',
@@ -131,12 +128,13 @@ export class UserController {
     return this._userService.login(loginData.email, loginData.password);
   }
 
-  @ApiOperation({ summary: 'Enregistre un nouveau utilisateur' })
-  @ApiBody({ type: CreateUserDto, description: 'Données du nouveau utilisateur' })
-  @ApiResponse({ status: 201, type: UserEntity, description: 'Utilisateur créée avec succès' })
-  @ApiResponse({ status: 400, description: 'Mauvaise demande' })
-  @Post('/register')
-  register(@Body() registerData: CreateUserDto): Observable<IdEntity> {
-    return this._userService.create(registerData);
+  @ApiOperation({ summary: 'Supprimer un utilisateur par ID' })
+  @ApiParam({ name: 'id', description: 'ID de l\'utilisateur' })
+  @ApiResponse({ status: 204, description: 'Utilisateur supprimée avec succès' })
+  @ApiResponse({ status: 404, description: 'Utilisateur non trouvée' })
+  @Delete(':id')
+  remove(@Param() params: HandlerParams): Observable<void> {
+    return this._userService.delete(params.id);
   }
+
 }

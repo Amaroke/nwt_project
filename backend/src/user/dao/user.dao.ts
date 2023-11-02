@@ -6,16 +6,14 @@ import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { User } from '../schemas/user.schema';
 import { UpdateUserDto } from '../dto/update-user.dto';
 
-
 @Injectable()
 export class UserDao {
 
-
   /**
- * Class constructor
- *
- * @param {Model<User>} _userModel instance of the model representing a user
- */
+   * Class constructor
+   *
+   * @param {Model<User>} _userModel instance of the model representing a user
+   */
   constructor(
     @InjectModel(User.name)
     private readonly _userModel: Model<User>,
@@ -33,45 +31,45 @@ export class UserDao {
 
 
   /**
-  * Returns one user of the list matching id in parameter
-  *
-  * @param {string} id of the user in the db
-  *
-  * @return {Observable<User | void>}
-  */
+    * Returns one user of the list matching id in parameter
+    *
+    * @param {string} id of the user in the db
+    *
+    * @return {Observable<User | void>}
+    */
   findById = (id: string): Observable<User | void> =>
     from(this._userModel.findById(id));
 
   /**
- * Returns one user from the list matching the provided email
- *
- * @param {string} email The email of the user to search for
- *
- * @return {Observable<User | void>}
- */
+   * Returns one user from the list matching the provided email
+   *
+   * @param {string} email The email of the user to search for
+   *
+   * @return {Observable<User | void>}
+   */
   findByEmail = (email: string): Observable<User | void> =>
     from(this._userModel.findOne({ email }));
 
 
   /**
-     * Save a new user to the database
-     *
-     * @param {CreateUserDto} user to create
-     *
-     * @return {Observable<User>}
-     */
+   * Save a new user to the database
+   *
+   * @param {CreateUserDto} user to create
+   *
+   * @return {Observable<User>}
+   */
   save = (user: CreateUserDto): Observable<User> =>
     from(new this._userModel(user).save());
 
 
   /**
-     * Update a user in the list of users
-     *
-     * @param {string} id of the user in the database
-     * @param {UpdateuserDto} user to update
-     *
-     * @return {Observable<user | void>}
-     */
+   * Update a user in the list of users
+   *
+   * @param {string} id of the user in the database
+   * @param {UpdateuserDto} user to update
+   *
+   * @return {Observable<user | void>}
+   */
   findByIdAndUpdate = (
     id: string,
     user: UpdateUserDto,

@@ -4,5 +4,4 @@ export class HandlerParams {
   @IsMongoId()
   @IsNotEmpty()
   id: string;
-
 }

@@ -41,9 +41,17 @@ export class QuestionsListComponent {
 
   isDateBefore(questionDate: Date | undefined): boolean {
     if (this.searchDate === undefined || questionDate === undefined) {
-      return true;
+      return false;
     }
     return new Date(this.searchDate) < new Date(questionDate);
+  }
+
+  filterQuestions() {
+    return this.questions.filter((question) => {
+      return (!this.searchOwner || question.owner === this.getUserConnected()) &&
+        question.title.includes(this.searchQuery) &&
+        !this.isDateBefore(question.date);
+    });
   }
 
 }

@@ -43,7 +43,7 @@ export class UserService {
 
   registerUser(firstname: string, lastname: string, email: string, password: string, phone: string): Observable<string> {
     const loginData = { firstname, lastname, email, password, phone };
-    return this._http.post<string>(`${this._apiUrl}/users/register`, loginData);
+    return this._http.post<string>(`${this._apiUrl}/users`, loginData);
   }
 
   getUserFirstName(id: string): Observable<string> {

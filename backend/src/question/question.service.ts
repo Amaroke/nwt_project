@@ -34,31 +34,11 @@ export class QuestionService {
 
     create = (question: CreateQuestionDto): Observable<QuestionEntity> =>
         this._questionsDao.save(question).pipe(
-            catchError((e) =>
-                e.code === 11000
-                    ? throwError(
-                        () =>
-                            new ConflictException(
-                                'A question with a similar title and content already exists',
-                            ),
-                    )
-                    : throwError(() => new UnprocessableEntityException(e.message)),
-            ),
             mergeMap((questionCreated) => of(new QuestionEntity(questionCreated))),
         );
 
     update = (id: string, question: UpdateQuestionDto): Observable<QuestionEntity> =>
         this._questionsDao.findByIdAndUpdate(id, question).pipe(
-            catchError((e) =>
-                e.code === 11000
-                    ? throwError(
-                        () =>
-                            new ConflictException(
-                                'A question with a similar title and content already exists',
-                            ),
-                    )
-                    : throwError(() => new UnprocessableEntityException(e.message)),
-            ),
             mergeMap((questionUpdated) =>
                 !!questionUpdated
                     ? of(new QuestionEntity(questionUpdated))

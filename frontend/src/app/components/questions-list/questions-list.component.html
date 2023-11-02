@@ -1,23 +1,20 @@
 <div class="center-section mt-16 mb-16 md:mx-0 mx-2 top-16">
     <ul>
-        <li *ngFor="let question of questions" [class.bg-blue-100]="isSelected(question)"
+        <li *ngFor="let question of filterQuestions()" [class.bg-blue-100]="isSelected(question)"
             [class.bg-slate-50]="!isSelected(question)" class="bg-background text-font p-4 rounded-lg shadow-md mt-4"
             (click)="toggleSelection(question)">
-            <div *ngIf="(!searchOwner || question.owner === getUserConnected()) && question.title.includes(searchQuery) && isDateBefore(question.date)"
-                class="flex flex-col justify-between h-full">
-                <div class="mb-4">
-                    <h2 class="text-xl font-semibold">{{ question.title }}</h2>
-                    <p class="mb-2">{{ question.content }}</p>
-                    <p class="font-bold">• {{ questionTypes[question.type - 1] }}</p>
-                    <ul *ngIf="question.type - 1 == 2" class="mb-2">
-                        Réponses :
-                        <li>&nbsp;&nbsp;A - {{ question.answers[0] }}</li>
-                        <li>&nbsp;&nbsp;B - {{ question.answers[1] }}</li>
-                        <li>&nbsp;&nbsp;C - {{ question.answers[2] }}</li>
-                        <li>&nbsp;&nbsp;D - {{ question.answers[3] }}</li>
-                    </ul>
-                    <p>Question créée le {{question.date | date:'dd-MM-yyyy' }}</p>
-                </div>
+            <div class="mb-4">
+                <h2 class="text-xl font-semibold">{{ question.title }}</h2>
+                <p class="mb-2">{{ question.content }}</p>
+                <p class="font-bold">• {{ questionTypes[question.type - 1] }}</p>
+                <ul *ngIf="question.type - 1 == 2" class="mb-2">
+                    Réponses :
+                    <li>&nbsp;&nbsp;A - {{ question.answers[0] }}</li>
+                    <li>&nbsp;&nbsp;B - {{ question.answers[1] }}</li>
+                    <li>&nbsp;&nbsp;C - {{ question.answers[2] }}</li>
+                    <li>&nbsp;&nbsp;D - {{ question.answers[3] }}</li>
+                </ul>
+                <p>Question créée le {{question.date | date:'dd-MM-yyyy' }}</p>
             </div>
         </li>
     </ul>
