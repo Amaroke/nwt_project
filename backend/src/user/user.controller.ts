@@ -4,7 +4,7 @@ import { UserService } from './user.service';
 import { UserEntity } from './entities/user.entity';
 import { Observable } from 'rxjs';
 import { HandlerParams } from './validators/handler-params';
-import { HttpInterceptor } from 'src/interceptors/http.interceptor';
+import { HttpInterceptor } from '../interceptors/http.interceptor';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { LoginDto } from './dto/login-user.dto';
