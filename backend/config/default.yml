@@ -1,6 +1,0 @@
-swagger:
-  title: Documentation NWT Project
-  description: The NWT Project API description
-  version: 1.0
-  tag: nwt
-  path: documentation

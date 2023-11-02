@@ -3,14 +3,21 @@ import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { SwaggerConfig } from './app.types';
 import { UserModule } from './user/user.module';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
-import * as Config from 'config';
 import { QuestionModule } from './question/question.module';
 
 
-async function bootstrap(swaggerConfig: SwaggerConfig) {
+async function bootstrap() {
+
+  // Config Swagger
+  const swaggerConfig = {
+    title: 'Documentation NWT Project',
+    description: 'The NWT Project API description',
+    version: '1.0',
+    tag: 'nwt',
+    path: 'documentation',
+  };
 
   // Create nest application
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -53,4 +60,4 @@ async function bootstrap(swaggerConfig: SwaggerConfig) {
   await app.listen(3000);
   Logger.log(`Application served at http://localhost:3000`, 'bootstrap');
 }
-bootstrap(Config.get<SwaggerConfig>('swagger'),);
+bootstrap();
