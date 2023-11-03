@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Survey } from 'src/app/shared/types/survey.type';
 import { SurveyService } from 'src/app/shared/services/survey.service';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-survey-crud-section',
@@ -54,7 +58,16 @@ export class SurveyCrudSectionComponent {
 
   exportSurvey(): void {
     if (this.surveySelected.id) {
-      console.log('Survey exported');
+
+      const docDefinition = {
+        content: [
+          'Titre de l\'enquête : ' + this.surveySelected.title,
+          'Description : ' + this.surveySelected.description,
+        ],
+      };
+
+      const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+      pdfDocGenerator.download('enquete.pdf');
     }
   }
 }
