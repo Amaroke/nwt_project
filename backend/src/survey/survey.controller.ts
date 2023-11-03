@@ -59,4 +59,13 @@ export class SurveyController {
     remove(@Param() params: HandlerParams): Observable<void> {
         return this.surveyService.delete(params.id);
     }
+
+    @ApiOperation({ summary: 'Augmente de 1 le nombre de téléchargements d\'un sondage par ID' })
+    @ApiParam({ name: 'id', description: 'ID du sondage' })
+    @ApiResponse({ status: 200, type: SurveyEntity, description: 'Sondage trouvé' })
+    @ApiResponse({ status: 404, description: 'Sondage non trouvé' })
+    @Put(':id/download')
+    download(@Param() params: HandlerParams): Observable<SurveyEntity> {
+        return this.surveyService.download(params.id);
+    }
 }

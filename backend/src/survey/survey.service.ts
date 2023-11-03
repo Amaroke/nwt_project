@@ -60,4 +60,15 @@ export class SurveyService {
                     ),
             ),
         );
+
+    download = (id: string): Observable<SurveyEntity> =>
+        this._surveyDao.incrementDownloads(id).pipe(
+            mergeMap((survey) =>
+                !!survey
+                    ? of(new SurveyEntity(survey))
+                    : throwError(
+                        () => new NotFoundException(`Survey with id '${id}' not found`),
+                    ),
+            ),
+        );
 }

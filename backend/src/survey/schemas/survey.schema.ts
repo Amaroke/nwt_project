@@ -47,6 +47,13 @@ export class Survey {
         required: true,
     })
     questions: string[];
+
+    @Prop({
+        type: Number,
+        required: true,
+        default: 0,
+    })
+    downloads: number;
 }
 
 export const SurveySchema = SchemaFactory.createForClass(Survey); 

@@ -71,4 +71,20 @@ export class SurveyDao {
      */
     deleteSurveyById = (id: string): Observable<Survey | void> =>
         from(this._surveyModel.findByIdAndRemove(id));
+
+    /**
+     * Augmente de 1 le nombre de téléchargements d'un sondage
+     * 
+     * @param {string} id du sondage dans la base de données
+     * 
+     * @return {Observable<Survey | void>} Le sondage mis à jour ou undefined
+     * 
+     */
+    incrementDownloads = (id: string): Observable<Survey | void> =>
+        from(
+            this._surveyModel.findByIdAndUpdate(id, { $inc: { downloads: 1 } }, {
+                new: true,
+                runValidators: true,
+            })
+        );
 }

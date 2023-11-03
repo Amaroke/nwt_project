@@ -60,7 +60,9 @@ export class SurveyCrudSectionComponent {
   }
 
   exportSurvey(): void {
+
     if (this.surveySelected.id) {
+      this._surveyService.downloadSurvey(this.surveySelected.id).subscribe(() => { });
       const docDefinition = {
         content: [
           this.surveySelected.title,
@@ -81,7 +83,7 @@ export class SurveyCrudSectionComponent {
               docDefinition.content.push(`Ecrivez votre réponse : _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________`);
             }
             if (question.type === 3) {
-              docDefinition.content.push(`Entourez votre réponse : ${question.answers.join('    |   ')}`);
+              docDefinition.content.push(`Entourez votre réponse :   ${question.answers.join('    |   ')}`);
             }
           })
         );

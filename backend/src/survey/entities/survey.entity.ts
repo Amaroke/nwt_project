@@ -58,6 +58,15 @@ export class SurveyEntity {
     @Type(() => String)
     questions: string[];
 
+    @ApiProperty({
+        name: 'downloads',
+        description: 'Number of times the survey has been downloaded',
+        example: 0,
+    })
+    @Expose()
+    @Type(() => Number)
+    downloads: number;
+
     /**
      * Class constructor
      *
@@ -70,5 +79,6 @@ export class SurveyEntity {
         this.date = partial.date;
         this.owner = partial.owner;
         this.questions = partial.questions;
+        this.downloads = partial.downloads;
     }
 }

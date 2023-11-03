@@ -10,6 +10,7 @@
                     <p class="mb-2">{{ survey.description }}</p>
                     <p class="font-bold">• Contient {{ survey.questions.length }} question(s).</p>
                     <p>Sondage créé le {{survey.date | date:'dd-MM-yyyy' }}</p>
+                    <p>Sondage téléchargé : {{ survey.downloads }} fois </p>
                 </div>
             </div>
         </li>

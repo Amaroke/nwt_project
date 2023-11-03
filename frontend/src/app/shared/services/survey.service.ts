@@ -38,4 +38,8 @@ export class SurveyService {
     deleteSurvey(id: string): Observable<void> {
         return this.http.delete<void>(`${this.apiUrl}/surveys/${id}`);
     }
+
+    downloadSurvey(id: string): Observable<void> {
+        return this.http.put<void>(`${this.apiUrl}/surveys/${id}/download`, {});
+    }
 }

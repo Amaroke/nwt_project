@@ -5,4 +5,5 @@ export type Survey = {
     questions: Array<string>;
     owner?: string;
     date?: Date;
+    downloads?: number;
 };
