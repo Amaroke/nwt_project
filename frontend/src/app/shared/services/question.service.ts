@@ -19,7 +19,7 @@ export class QuestionService {
     return this._http.get<Question[]>(`${this._apiUrl}/questions`);
   }
 
-  getQuestion(id: number): Observable<Question> {
+  getQuestion(id: string): Observable<Question> {
     return this._http.get<Question>(`${this._apiUrl}/questions/${id}`);
   }
 
