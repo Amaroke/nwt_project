@@ -11,11 +11,13 @@
     </div>
     <div class="flex-1 hidden md:block w-1/6 p-2 sticky mt-14">
         <app-question-crud-section *ngIf="activeTab === 'question'" (open)="openPopup()" (openEdit)="openEditPopup()"
-            [questions]="questions" [questionsSelected]="questionsSelected" />
+            (openPopupSurvey)="openPopupSurvey()" [questions]="questions" [questionsSelected]="questionsSelected" />
         <app-survey-crud-section *ngIf="activeTab === 'sondage'" (open)="openPopup()" (openEdit)="openEditPopup()"
             [surveys]="surveys" [surveySelected]="surveySelected" />
     </div>
     <app-question-create-popup [questions]="questions" (close)="closePopup()" *ngIf="showPopup" class="relative" />
     <app-question-edit-popup [question]="questionsSelected[0]" (close)="closeEditPopup()" *ngIf="showEditPopup"
+        class="relative" />
+    <app-survey-create-popup [questions]="questionsSelected" (close)="closePopupSurvey()" *ngIf="showPopupSurvey"
         class="relative" />
 </div>

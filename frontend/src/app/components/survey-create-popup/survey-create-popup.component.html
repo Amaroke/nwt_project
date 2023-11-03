@@ -1,0 +1,20 @@
+<div class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center">
+    <div class="fixed top-0 left-0 w-screen h-screen bg-gray-800 bg-opacity-70"></div>
+    <div class="bg-white p-8 rounded-lg shadow-xl relative z-50">
+        <h2 class="text-3xl mb-4">Ajouter un sondage</h2>
+        <input [(ngModel)]="survey.title" class="w-full px-3 py-2 mb-4 border rounded-md"
+            placeholder="Titre du sondage">
+        <textarea [(ngModel)]="survey.description" class="w-full px-3 py-2 mb-4 border rounded-md"
+            placeholder="Description du sondage">
+        </textarea>
+        <div class="mt-4 flex justify-center">
+            <button (click)="closePopup()" class="bg-red-500 hover-bg-red-600 text-white px-4 py-2 rounded-lg">
+                Annuler
+            </button>
+            <button (click)="saveQuestion()"
+                class=" bg-green-500 hover-bg-green-600 text-white px-4 py-2 rounded-lg ml-2">
+                Enregistrer
+            </button>
+        </div>
+    </div>
+</div>

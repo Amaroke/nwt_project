@@ -42,4 +42,20 @@ export class SurveysListComponent {
     return localStorage.getItem('userId');
   }
 
+
+  isDateBefore(questionDate: Date | undefined): boolean {
+    if (this.searchDate === undefined || questionDate === undefined) {
+      return false;
+    }
+    return new Date(this.searchDate) < new Date(questionDate);
+  }
+
+  filterSurveys() {
+    return this.surveys.filter((survey) => {
+      return (!this.searchOwner || survey.owner === this.getUserConnected()) &&
+        survey.title.includes(this.searchQuery) &&
+        !this.isDateBefore(survey.date);
+    }).sort((a, b) => (b.downloads || 0) - (a.downloads || 0));
+  }
+
 }

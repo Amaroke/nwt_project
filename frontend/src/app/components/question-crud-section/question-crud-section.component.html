@@ -1,6 +1,6 @@
 <div class="bg-background p-8 rounded-lg shadow-md sticky top-16 bg-slate-50">
     <div class="mb-4 flex flex-wrap justify-center items-center">
-        <button class="btn btn-primary mb-2 w-full text-white px-4 py-2 rounded-lg"
+        <button (click)="openSurvey()" class="btn btn-primary mb-2 w-full text-white px-4 py-2 rounded-lg"
             [class.bg-blue-500]="isSelectedNotEmpty() && userIsConnected()"
             [class.bg-gray-400]="!isSelectedNotEmpty() || !userIsConnected()"
             [class.hover:bg-blue-600]="isSelectedNotEmpty() && userIsConnected()"

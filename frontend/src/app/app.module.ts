@@ -22,6 +22,7 @@ import { QuestionCreatePopupComponent } from './components/question-create-popup
 import { QuestionEditPopupComponent } from './components/question-edit-popup/question-edit-popup.component';
 import { SurveyCrudSectionComponent } from './components/survey-crud-section/survey-crud-section.component';
 import { SurveysListComponent } from './components/surveys-list/surveys-list.component';
+import { SurveyCreatePopupComponent } from './components/survey-create-popup/survey-create-popup.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SurveysListComponent } from './components/surveys-list/surveys-list.com
     QuestionCreatePopupComponent,
     QuestionEditPopupComponent,
     SurveyCrudSectionComponent,
-    SurveysListComponent
+    SurveysListComponent,
+    SurveyCreatePopupComponent
   ],
   imports: [
     BrowserModule,

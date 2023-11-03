@@ -18,7 +18,7 @@
         </div>
         <div *ngIf="activeTab === 'sondage'">
             <input type="text" placeholder="Rechercher un sondage..." class="w-full px-4 py-2 border rounded-lg"
-                [(ngModel)]="searchQuery">
+                [(ngModel)]="searchQuery" (input)="setSearchQuery($event)">
         </div>
     </div>
     <div class=" mb-4 flex items-center">

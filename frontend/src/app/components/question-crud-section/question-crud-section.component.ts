@@ -13,6 +13,7 @@ export class QuestionCrudSectionComponent {
   @Input() questions: Question[];
   @Output() open = new EventEmitter<void>();
   @Output() openEdit = new EventEmitter<void>();
+  @Output() openPopupSurvey = new EventEmitter<void>();
 
   constructor(private _questionService: QuestionService) {
     this.questionsSelected = [];
@@ -49,6 +50,10 @@ export class QuestionCrudSectionComponent {
 
   openEditPopup(): void {
     this.openEdit.emit();
+  }
+
+  openSurvey(): void {
+    this.openPopupSurvey.emit();
   }
 
   userIsConnected(): boolean {

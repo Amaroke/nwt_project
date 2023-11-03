@@ -1,6 +1,6 @@
 <div class="center-section mt-16 mb-16 md:mx-0 mx-2 top-16">
     <ul>
-        <li *ngFor="let survey of surveys" [class.bg-blue-100]="isSelected(survey)"
+        <li *ngFor="let survey of filterSurveys()" [class.bg-blue-100]="isSelected(survey)"
             [class.bg-slate-50]="!isSelected(survey)" class="bg-background text-font p-4 rounded-lg shadow-md mt-4"
             (click)="toggleSelection(survey)">
             <div *ngIf="!searchOwner || survey.owner === getUserConnected()"

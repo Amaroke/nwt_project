@@ -61,6 +61,11 @@ export class SurveyCrudSectionComponent {
 
   exportSurvey(): void {
 
+    if (this.surveySelected.downloads === undefined)
+      this.surveySelected.downloads = 1;
+    else
+      this.surveySelected.downloads++;
+
     if (this.surveySelected.id) {
       this._surveyService.downloadSurvey(this.surveySelected.id).subscribe(() => { });
       const docDefinition = {

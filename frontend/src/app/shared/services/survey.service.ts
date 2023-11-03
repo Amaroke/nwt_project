@@ -24,7 +24,7 @@ export class SurveyService {
 
     createSurvey(surveyData: Survey): Observable<Survey> {
         delete surveyData.id;
-        surveyData.date = new Date();
+        delete surveyData.date;
         return this.http.post<Survey>(`${this.apiUrl}/surveys`, surveyData);
     }
 
