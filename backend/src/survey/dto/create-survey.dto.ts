@@ -28,4 +28,13 @@ export class CreateSurveyDto {
     @IsString()
     @IsNotEmpty()
     owner: string;
+
+    @ApiProperty({
+        name: 'questions',
+        description: "Questions of the survey",
+        example: ["Java", "Python", "C++", "C#", "JavaScript", "PHP", "Ruby", "Go", "Swift", "Rust"]
+    })
+    @IsString({ each: true })
+    @IsNotEmpty()
+    questions: string[];
 }

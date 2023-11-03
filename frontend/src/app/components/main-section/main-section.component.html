@@ -6,14 +6,14 @@
     <div class="flex-2 lg:w-1/2">
         <app-questions-list *ngIf="activeTab === 'question'" [searchQuery]="searchQuery" [searchDate]="searchDate"
             [searchOwner]="searchOwner" [questions]="questions" [questionsSelected]="questionsSelected" />
-        <app-sondages-list *ngIf="activeTab === 'sondage'" [searchQuery]="searchQuery" [searchDate]="searchDate"
-            [searchOwner]="searchOwner" />
+        <app-surveys-list *ngIf="activeTab === 'sondage'" [surveys]="surveys" [(surveySelected)]="surveySelected"
+            [searchQuery]="searchQuery" [searchDate]="searchDate" [searchOwner]="searchOwner" />
     </div>
     <div class="flex-1 hidden md:block w-1/6 p-2 sticky mt-14">
-        <app-sondage-crud-section *ngIf="activeTab === 'sondage'" (open)="openPopup()" (openEdit)="openEditPopup()"
-            [questions]="questions" [questionsSelected]="questionsSelected" />
         <app-question-crud-section *ngIf="activeTab === 'question'" (open)="openPopup()" (openEdit)="openEditPopup()"
             [questions]="questions" [questionsSelected]="questionsSelected" />
+        <app-survey-crud-section *ngIf="activeTab === 'sondage'" (open)="openPopup()" (openEdit)="openEditPopup()"
+            [surveys]="surveys" [surveySelected]="surveySelected" />
     </div>
     <app-question-create-popup [questions]="questions" (close)="closePopup()" *ngIf="showPopup" class="relative" />
     <app-question-edit-popup [question]="questionsSelected[0]" (close)="closeEditPopup()" *ngIf="showEditPopup"

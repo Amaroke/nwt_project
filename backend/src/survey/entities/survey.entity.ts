@@ -49,6 +49,15 @@ export class SurveyEntity {
     @Type(() => String)
     owner: string;
 
+    @ApiProperty({
+        name: 'questions',
+        description: 'Questions of the survey',
+        example: ['Java', 'Python', 'C++', 'C#', 'JavaScript', 'PHP', 'Ruby', 'Go', 'Swift', 'Rust'],
+    })
+    @Expose()
+    @Type(() => String)
+    questions: string[];
+
     /**
      * Class constructor
      *
@@ -60,5 +69,6 @@ export class SurveyEntity {
         this.description = partial.description;
         this.date = partial.date;
         this.owner = partial.owner;
+        this.questions = partial.questions;
     }
 }

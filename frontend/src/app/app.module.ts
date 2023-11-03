@@ -20,8 +20,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuestionCreatePopupComponent } from './components/question-create-popup/create-question-popup.component';
 import { QuestionEditPopupComponent } from './components/question-edit-popup/question-edit-popup.component';
-import { SondageCrudSectionComponent } from './components/sondage-crud-section/sondage-crud-section.component';
-import { SondagesListComponent } from './components/sondages-list/sondages-list.component';
+import { SurveyCrudSectionComponent } from './components/survey-crud-section/survey-crud-section.component';
+import { SurveysListComponent } from './components/surveys-list/surveys-list.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +36,8 @@ import { SondagesListComponent } from './components/sondages-list/sondages-list.
     RegisterComponent,
     QuestionCreatePopupComponent,
     QuestionEditPopupComponent,
-    SondageCrudSectionComponent,
-    SondagesListComponent
+    SurveyCrudSectionComponent,
+    SurveysListComponent
   ],
   imports: [
     BrowserModule,

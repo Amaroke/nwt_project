@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionService } from '../../shared/services/question.service';
 import { Question } from '../../shared/types/question.type';
+import { Survey } from 'src/app/shared/types/survey.type';
+import { SurveyService } from 'src/app/shared/services/survey.service';
 
 
 @Component({
@@ -11,19 +13,24 @@ import { Question } from '../../shared/types/question.type';
 export class MainSectionComponent implements OnInit {
 
   private _questions: Question[];
+  private _surveys: Survey[];
   private _questionsSelected: Question[];
   private _showPopup = false;
   private _showEditPopup = false;
   private _activeTab = 'question';
+  surveySelected: Survey;
   searchQuery: string;
   searchDate: Date | undefined;
   searchOwner: boolean;
 
   constructor(
     private _questionService: QuestionService,
+    private _surveyService: SurveyService
   ) {
     this._questions = [] as Question[];
+    this._surveys = [] as Survey[];
     this._questionsSelected = [] as Question[];
+    this.surveySelected = {} as Survey;
     this._showPopup = false;
     this._showEditPopup = false;
     this._activeTab = 'question';
@@ -36,10 +43,17 @@ export class MainSectionComponent implements OnInit {
     this._questionService.getQuestions().subscribe(questions => {
       this._questions = questions;
     });
+    this._surveyService.getSurveys().subscribe(surveys => {
+      this._surveys = surveys;
+    });
   }
 
   get questions(): Question[] {
     return this._questions;
+  }
+
+  get surveys(): Survey[] {
+    return this._surveys;
   }
 
   get questionsSelected(): Question[] {
