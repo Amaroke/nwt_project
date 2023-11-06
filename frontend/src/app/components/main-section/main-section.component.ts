@@ -18,7 +18,6 @@ export class MainSectionComponent implements OnInit {
   private _showPopup = false;
   private _showEditPopup = false;
   private _showPopupSurvey = false;
-  private _showEditPopupSurvey = false;
   private _activeTab = 'question';
   surveySelected: Survey;
   searchQuery: string;
@@ -36,7 +35,6 @@ export class MainSectionComponent implements OnInit {
     this._showPopup = false;
     this._showEditPopup = false;
     this._showPopupSurvey = false;
-    this._showEditPopupSurvey = false;
     this._activeTab = 'question';
     this.searchQuery = '';
     this.searchDate = undefined;
@@ -102,14 +100,6 @@ export class MainSectionComponent implements OnInit {
 
   closePopupSurvey(): void {
     this._showPopupSurvey = false;
-  }
-
-  openPopupEditSurvey(): void {
-    this._showEditPopupSurvey = true;
-  }
-
-  closePopupEditSurvey(): void {
-    this._showEditPopupSurvey = false;
   }
 
   changeActiveTab(): void {

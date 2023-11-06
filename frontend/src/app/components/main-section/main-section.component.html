@@ -1,23 +1,23 @@
-<div class="flex">
-    <div class="flex-1 hidden md:block w-1/6 p-2 sticky mt-14">
+<div class="flex flex-col md:flex-row">
+    <div class="flex-1 w-full md:w-1/6 p-2 sticky mt-14 mb-2 md:mb-0">
         <app-search-section [(searchQuery)]="searchQuery" [(searchDate)]="searchDate" [(searchOwner)]="searchOwner"
             (activeTabChange)="changeActiveTab()" [activeTab]="activeTab" />
     </div>
-    <div class="flex-2 lg:w-1/2">
+    <div class="flex-2 w-full lg:w-1/2">
         <app-questions-list *ngIf="activeTab === 'question'" [searchQuery]="searchQuery" [searchDate]="searchDate"
             [searchOwner]="searchOwner" [questions]="questions" [questionsSelected]="questionsSelected" />
         <app-surveys-list *ngIf="activeTab === 'sondage'" [surveys]="surveys" [(surveySelected)]="surveySelected"
             [searchQuery]="searchQuery" [searchDate]="searchDate" [searchOwner]="searchOwner" />
     </div>
-    <div class="flex-1 hidden md:block w-1/6 p-2 sticky mt-14">
+    <div class="flex-1 w-full p-2 sticky lg:mt-14 mb-14">
         <app-question-crud-section *ngIf="activeTab === 'question'" (open)="openPopup()" (openEdit)="openEditPopup()"
             (openPopupSurvey)="openPopupSurvey()" [questions]="questions" [questionsSelected]="questionsSelected" />
         <app-survey-crud-section *ngIf="activeTab === 'sondage'" (open)="openPopup()" (openEdit)="openEditPopup()"
             [surveys]="surveys" [surveySelected]="surveySelected" />
     </div>
-    <app-question-create-popup [questions]="questions" (close)="closePopup()" *ngIf="showPopup" class="relative" />
-    <app-question-edit-popup [question]="questionsSelected[0]" (close)="closeEditPopup()" *ngIf="showEditPopup"
-        class="relative" />
-    <app-survey-create-popup [questions]="questionsSelected" (close)="closePopupSurvey()" *ngIf="showPopupSurvey"
-        class="relative" />
 </div>
+<app-question-create-popup [questions]="questions" (close)="closePopup()" *ngIf="showPopup" class="relative" />
+<app-question-edit-popup [question]="questionsSelected[0]" (close)="closeEditPopup()" *ngIf="showEditPopup"
+    class="relative" />
+<app-survey-create-popup [questions]="questionsSelected" (close)="closePopupSurvey()" *ngIf="showPopupSurvey"
+    class="relative" />
