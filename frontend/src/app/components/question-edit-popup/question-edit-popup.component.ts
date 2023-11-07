@@ -35,6 +35,5 @@ export class QuestionEditPopupComponent {
 
   closePopup(): void {
     this.close.emit();
-    window.location.reload();
   }
 }

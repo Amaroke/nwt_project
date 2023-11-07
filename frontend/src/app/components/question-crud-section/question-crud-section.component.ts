@@ -61,10 +61,10 @@ export class QuestionCrudSectionComponent {
   }
 
   isDeletable(): boolean {
-    return this.questionsSelected.length > 0 && localStorage.getItem('userId') === this.questionsSelected[0].owner;
+    return this.questionsSelected.length == 1 && localStorage.getItem('userId') === this.questionsSelected[0].owner;
   }
 
   isEditable(): boolean {
-    return this.questionsSelected.length > 0 && localStorage.getItem('userId') === this.questionsSelected[0].owner;
+    return this.questionsSelected.length == 1 && localStorage.getItem('userId') === this.questionsSelected[0].owner;
   }
 }
