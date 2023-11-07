@@ -54,7 +54,7 @@
                 <button (click)="closePopup()" class="bg-red-500 hover-bg-red-600 text-white px-4 py-2 rounded-lg">
                     Annuler
                 </button>
-                <button type="submit"
+                <button type="submit" [disabled]="questionForm.invalid"
                     class=" bg-green-500 hover-bg-green-600 text-white px-4 py-2 rounded-lg ml-2">
                     Enregistrer
                 </button>
