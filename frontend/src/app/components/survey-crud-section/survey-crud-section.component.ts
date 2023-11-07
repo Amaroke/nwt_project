@@ -68,19 +68,39 @@ export class SurveyCrudSectionComponent {
 
     if (this.surveySelected.id) {
       this._surveyService.downloadSurvey(this.surveySelected.id).subscribe(() => { });
-      const docDefinition = {
+      const docDefinition: any = {
         content: [
-          this.surveySelected.title,
+          { text: this.surveySelected.title, style: 'header' },
           "\n",
           this.surveySelected.description,
           "\n"
         ],
+        styles: {
+          header: {
+            fontSize: 18,
+            bold: true,
+            alignment: 'center',
+            margin: [0, 0, 0, 10]
+          },
+          question: {
+            fontSize: 14,
+            margin: [0, 5, 0, 5]
+          },
+          answer: {
+            fontSize: 12,
+            margin: [0, 5, 0, 5]
+          }
+        }
       };
 
       const questionObservables = this.surveySelected.questions.map((id, index) => {
         return this._questionService.getQuestion(id).pipe(
           map((question) => {
-            docDefinition.content.push(`${index + 1} : ${question.content}`);
+            docDefinition.content.push("\n\n");
+            docDefinition.content.push(`Question ${index + 1} : ${question.content}`);
+            docDefinition.content.push("\n");
+            docDefinition.content.push(`${question.content}`);
+            docDefinition.content.push("\n");
             if (question.type === 1) {
               docDefinition.content.push(`Entourez votre réponse : VRAI | FAUX`);
             }
@@ -93,6 +113,7 @@ export class SurveyCrudSectionComponent {
           })
         );
       });
+
 
       forkJoin(questionObservables).subscribe(() => {
         const pdfDocGenerator = pdfMake.createPdf(docDefinition);

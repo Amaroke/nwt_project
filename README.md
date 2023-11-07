@@ -1,4 +1,4 @@
-# nwt_project
+# SondaGénial
 A web application for a New Web Technologies course, implementing a CRUD API using NestJS and a frontend in Angular<br/>
 
 Install the project :<br/>

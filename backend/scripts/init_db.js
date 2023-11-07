@@ -38,7 +38,7 @@ const userBob = db.users.findOne({ email: "bob.j@example.com" });
 
 db.questions.insert([
     {
-        title: "Le drapeau de la France contient 3 couleurs.",
+        title: "Un couscous contient des merguez.",
         content: "Veuillez répondre par vrai ou faux.",
         answers: [],
         type: 1,
@@ -74,8 +74,8 @@ db.surveys.insert([
         date: new Date(),
         owner: userJohn._id,
         questions: [
-            questionA,
-            questionB
+            questionA._id,
+            questionB._id
         ],
         downloads: 0
     },
@@ -84,7 +84,7 @@ db.surveys.insert([
         description: "Un sondage sur vos loisirs.",
         date: new Date(),
         owner: userAlice._id,
-        questions: [questionC],
+        questions: [questionC._id],
         downloads: 0
     }
 ]);
