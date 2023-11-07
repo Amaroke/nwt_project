@@ -40,17 +40,17 @@ const userBob = db.users.findOne({ email: "bob.j@example.com" });
 // Utilisez les IDs des utilisateurs pour créer des questions
 db.questions.insert([
     {
-        title: "Quelle est votre couleur préférée ?",
-        content: "Veuillez sélectionner votre couleur préférée parmi les options suivantes.",
-        answers: ["Rouge", "Bleu", "Vert", "Jaune"],
+        title: "Le drapeau de la France contient 3 couleurs.",
+        content: "Veuillez répondre par vrai ou faux.",
+        answers: [],
         type: 1, // 1 pourrait représenter un choix unique
         owner: userJohn._id,
         date: new Date()
     },
     {
         title: "Quelle est votre plat préféré ?",
-        content: "Veuillez indiquer votre plat préféré parmi les options suivantes.",
-        answers: ["Pizza", "Sushi", "Pâtes", "Burger"],
+        content: "Veuillez indiquer votre plat préféré.",
+        answers: [],
         type: 2, // 2 pourrait représenter un choix multiple
         owner: userAlice._id,
         date: new Date()
@@ -65,24 +65,30 @@ db.questions.insert([
     }
 ]);
 
+const questionA = db.questions.findOne({ title: "Un couscous contient des merguez." });
+const questionB = db.questions.findOne({ title: "Quelle est votre plat préféré ?" });
+const questionC = db.questions.findOne({ title: "À quelle fréquence faites-vous du sport ?" });
+
+
+
 db.surveys.insert([
     {
-        title: "Sondage sur les loisirs",
-        description: "Un sondage sur les loisirs préférés.",
+        title: "Sondage sur la nourriture",
+        description: "Un sondage sur la nourriture.",
         date: new Date(),
         owner: userJohn._id,
         questions: [
-            "Quelle est votre couleur préférée ?",
-            "Quelle est votre plat préféré ?"
+            questionA,
+            questionB
         ],
         downloads: 0
     },
     {
-        title: "Sondage sur la nourriture",
-        description: "Un sondage sur les préférences alimentaires.",
+        title: "Sondage sur les loisirs ",
+        description: "Un sondage sur vos loisirs.",
         date: new Date(),
         owner: userAlice._id,
-        questions: ["À quelle fréquence faites-vous du sport ?"],
+        questions: [questionC],
         downloads: 0
     }
 ]);
