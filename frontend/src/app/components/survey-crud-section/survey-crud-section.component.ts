@@ -97,7 +97,7 @@ export class SurveyCrudSectionComponent {
         return this._questionService.getQuestion(id).pipe(
           map((question) => {
             docDefinition.content.push("\n\n");
-            docDefinition.content.push(`Question ${index + 1} : ${question.content}`);
+            docDefinition.content.push(`Question ${index + 1} : ${question.title}`);
             docDefinition.content.push("\n");
             docDefinition.content.push(`${question.content}`);
             docDefinition.content.push("\n");
