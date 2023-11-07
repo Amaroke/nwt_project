@@ -1,7 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Exclude, Expose, Type } from "@nestjs/class-transformer";
 import { User } from "../schemas/user.schema";
-import { ArrayUnique } from "class-validator";
 
 @Exclude()
 export class UserEntity {

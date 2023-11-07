@@ -1,5 +1,4 @@
 import { Logger, Module } from '@nestjs/common';
-
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './schemas/user.schema';
 import { UserController } from './user.controller';

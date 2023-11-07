@@ -4,21 +4,19 @@
         <form #questionForm="ngForm" (ngSubmit)="saveQuestion()">
             <h2 class="text-3xl mb-4">Ajouter une question</h2>
             <input [(ngModel)]="question.title" class="w-full px-3 py-2 mt-4 border rounded-md"
-                placeholder="Titre de la question" required pattern=".{5,}" name="title">
-                <span class="min-h-32 flex">
-                    &nbsp;
-                    <mat-error *ngIf="questionForm.controls['title'].touched && questionForm.controls['title'].invalid"
-                        class="text-red-500 select-none">
-                        Titre invalide (5 caractères minimum)
-                    </mat-error>
-                </span>
-            <textarea [(ngModel)]="question.content" class="w-full px-3 py-2 mt-4 border rounded-md"
+                placeholder="Titre de la question" #title="ngModel" required pattern=".{5,}" name="title">
+            <span class="min-h-32 flex">
+                &nbsp;
+                <mat-error *ngIf="title.touched && title.invalid" class="text-red-500 select-none">
+                    Titre invalide (5 caractères minimum)
+                </mat-error>
+            </span>
+            <textarea [(ngModel)]="question.content" class="w-full px-3 py-2 mt-4 border rounded-md" #content="ngModel"
                 placeholder="Contenu de la question" required pattern=".{20,}" name="content">
             </textarea>
             <span class="min-h-32 flex">
                 &nbsp;
-                <mat-error *ngIf="questionForm.controls['content'].touched && questionForm.controls['content'].invalid"
-                    class="text-red-500 select-none">
+                <mat-error *ngIf="content.touched && content.invalid" class="text-red-500 select-none">
                     Description invalide (20 caractères minimum)
                 </mat-error>
             </span>
@@ -34,22 +32,22 @@
             <div *ngIf="question.type === 3">
                 <label>Réponses :</label>
                 <input [(ngModel)]="question.answers[0] " class="w-full px-3 py-2 mb-2 border rounded-md"
-                    [placeholder]="'Réponse 1'" required name="reponse1">
+                    #response1="ngModel" [placeholder]="'Réponse 1'" required name="reponse1">
                 <input [(ngModel)]="question.answers[1]" class="w-full px-3 py-2 mb-2 border rounded-md"
-                    [placeholder]="'Réponse 2'" required name="reponse2">
+                    #response2="ngModel" [placeholder]="'Réponse 2'" required name="reponse2">
                 <input [(ngModel)]="question.answers[2]" class="w-full px-3 py-2 mb-2 border rounded-md"
                     [placeholder]="'Réponse 3'">
                 <input [(ngModel)]="question.answers[3]" class="w-full px-3 py-2 mb-2 border rounded-md"
                     [placeholder]="'Réponse 4'">
-                    <span class="min-h-32 flex">
-                        &nbsp;
-                        <mat-error *ngIf="questionForm.controls['reponse1'].touched && questionForm.controls['reponse2'].touched
-                            && (questionForm.controls['reponse1'].hasError('required') || questionForm.controls['reponse2'].hasError('required'))">
-                            Les deux premiers choix sont <strong>requis</strong>
-                        </mat-error>        
-                    </span>
+                <span class="min-h-32 flex">
+                    &nbsp;
+                    <mat-error *ngIf="response1.touched && response2.touched
+                            && (response1.hasError('required') || response2.hasError('required'))">
+                        Les deux premiers choix sont <strong>requis</strong>
+                    </mat-error>
+                </span>
             </div>
-            
+
             <div class="mt-4 flex justify-center">
                 <button (click)="closePopup()" class="bg-red-500 hover-bg-red-600 text-white px-4 py-2 rounded-lg">
                     Annuler
@@ -59,6 +57,6 @@
                     Enregistrer
                 </button>
             </div>
-    </form>
+        </form>
     </div>
 </div>

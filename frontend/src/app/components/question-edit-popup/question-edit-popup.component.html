@@ -1,57 +1,61 @@
 <div class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center">
     <div class="fixed top-0 left-0 w-screen h-screen bg-gray-800 bg-opacity-70"></div>
     <div class="bg-white p-8 rounded-lg shadow-xl relative z-50">
-        <form #questionForm="ngForm" (ngSubmit)="saveQuestion()" >
+        <form #questionForm="ngForm" (ngSubmit)="saveQuestion()">
             <h2 class="text-3xl mb-4">Modifier une question</h2>
-                <input matInput [(ngModel)]="question.title" name="title" required placeholder="Titre de la question" class="w-full px-3 py-2 mt-4 border rounded-md" required pattern=".{5,}">
-                <span class="min-h-32 flex">
-                    &nbsp;
-                <mat-error *ngIf="questionForm.controls['title'].touched && questionForm.controls['title'].invalid">
+            <input matInput [(ngModel)]="question.title" name="title" placeholder="Titre de la question"
+                #title="ngModel" class="w-full px-3 py-2 mt-4 border rounded-md" required>
+            <span class="min-h-32 flex">
+                &nbsp;
+                <mat-error *ngIf="title.touched && title.invalid">
                     Titre invalide (5 caractères minimum)
                 </mat-error>
-                </span>
-                <textarea matInput [(ngModel)]="question.content" name="content" required placeholder="Contenu de la question" class="w-full px-3 py-2 mt-4 border rounded-md" required pattern=".{20,}"></textarea>
-                <span class="min-h-32 flex">
-                    &nbsp;
-                <mat-error *ngIf="questionForm.controls['content'].touched && questionForm.controls['content'].invalid">
+            </span>
+            <textarea matInput [(ngModel)]="question.content" name="content" required
+                placeholder="Contenu de la question" class="w-full px-3 py-2 mt-4 border rounded-md" required
+                #content="ngModel" pattern=".{20,}"></textarea>
+            <span class="min-h-32 flex">
+                &nbsp;
+                <mat-error *ngIf="content.touched && content.invalid">
                     Description invalide (20 caractères minimum)
                 </mat-error>
-                </span>
+            </span>
             <div class="mb-4">
                 <label>Type de question :</label>
-                <select matInput [(ngModel)]="question.type" name="type" required class="w-full px-3 py-2 border rounded-md"
-                (ngModelChange)="question.type = $event === '1' ? 1 : ($event === '2' ? 2 : 3)" name="type">
+                <select matInput [(ngModel)]="question.type" name="type" required
+                    class="w-full px-3 py-2 border rounded-md" #type="ngModel"
+                    (ngModelChange)="question.type = $event === '1' ? 1 : ($event === '2' ? 2 : 3)" name="type">
                     <option value="1">Question Vrai/Faux</option>
                     <option value="2">Question à réponse libre</option>
                     <option value="3">Question à choix multiple</option>
                 </select>
-                <mat-error *ngIf="questionForm.controls['type'].hasError('required')">
+                <mat-error *ngIf="type.hasError('required')">
                     Le type de question est requis.
                 </mat-error>
             </div>
             <div *ngIf="question.type === 3">
                 <label>Réponses :</label>
-                <input [(ngModel)]="question.answers[0] " class="w-full px-3 py-2 mb-2 border rounded-md"
-                    [placeholder]="'Réponse 1'" required name="reponse1">
+                <input [(ngModel)]="question.answers[0]" class="w-full px-3 py-2 mb-2 border rounded-md"
+                    #response1="ngModel" [placeholder]="'Réponse 1'" required name="reponse1">
                 <input [(ngModel)]="question.answers[1]" class="w-full px-3 py-2 mb-2 border rounded-md"
-                    [placeholder]="'Réponse 2'" required name="reponse2">
+                    #response2="ngModel" [placeholder]="'Réponse 2'" required name="reponse2">
                 <input [(ngModel)]="question.answers[2]" class="w-full px-3 py-2 mb-2 border rounded-md"
                     [placeholder]="'Réponse 3'">
                 <input [(ngModel)]="question.answers[3]" class="w-full px-3 py-2 mb-2 border rounded-md"
                     [placeholder]="'Réponse 4'">
-                    <span class="min-h-32 flex">
-                        &nbsp;
-                        <mat-error *ngIf="questionForm.controls['reponse1'].touched && questionForm.controls['reponse2'].touched
-                            && (questionForm.controls['reponse1'].hasError('required') || questionForm.controls['reponse2'].hasError('required'))">
-                            Les deux premiers choix sont <strong>requis</strong>
-                        </mat-error>        
-                    </span>
+                <span class="min-h-32 flex">
+                    &nbsp;
+                    <mat-error
+                        *ngIf="response1.touched && response2.touched && (response1.hasError('required') || response2.hasError('required'))">
+                        Les deux premiers choix sont <strong>requis</strong>
+                    </mat-error>
+                </span>
             </div>
             <div class="mt-4 flex justify-center">
                 <button (click)="closePopup()" class="bg-red-500 hover-bg-red-600 text-white px-4 py-2 rounded-lg">
                     Annuler
                 </button>
-                <button type="submit"[disabled]="questionForm.invalid"
+                <button type="submit" [disabled]="questionForm.invalid"
                     class=" bg-green-500 hover-bg-green-600 text-white px-4 py-2 rounded-lg ml-2">
                     Enregistrer
                 </button>

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { filter, from, map, mergeMap, Observable } from 'rxjs';
+import { from, map, Observable } from 'rxjs';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { User } from '../schemas/user.schema';
 import { UpdateUserDto } from '../dto/update-user.dto';

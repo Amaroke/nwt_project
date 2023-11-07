@@ -91,6 +91,10 @@ export class MainSectionComponent implements OnInit {
   }
 
   closeEditPopup(): void {
+    this._questionService.getQuestions().subscribe(questions => {
+      this._questions = questions;
+    });
+    this._questionsSelected = [] as Question[];
     this._showEditPopup = false;
   }
 

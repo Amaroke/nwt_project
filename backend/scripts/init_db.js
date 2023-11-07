@@ -8,7 +8,6 @@ db.createCollection('users');
 db.createCollection('questions');
 db.createCollection('surveys');
 
-// The prototype form to create a collection:
 db.users.insert([
     {
         firstname: "John",
@@ -37,13 +36,12 @@ const userJohn = db.users.findOne({ email: "johndoe@example.com" });
 const userAlice = db.users.findOne({ email: "alicesmith@example.com" });
 const userBob = db.users.findOne({ email: "bob.j@example.com" });
 
-// Utilisez les IDs des utilisateurs pour créer des questions
 db.questions.insert([
     {
         title: "Le drapeau de la France contient 3 couleurs.",
         content: "Veuillez répondre par vrai ou faux.",
         answers: [],
-        type: 1, // 1 pourrait représenter un choix unique
+        type: 1,
         owner: userJohn._id,
         date: new Date()
     },
@@ -51,7 +49,7 @@ db.questions.insert([
         title: "Quelle est votre plat préféré ?",
         content: "Veuillez indiquer votre plat préféré.",
         answers: [],
-        type: 2, // 2 pourrait représenter un choix multiple
+        type: 2,
         owner: userAlice._id,
         date: new Date()
     },
@@ -59,7 +57,7 @@ db.questions.insert([
         title: "À quelle fréquence faites-vous du sport ?",
         content: "Indiquez la fréquence de vos activités sportives.",
         answers: ["Tous les jours", "2-3 fois par semaine", "Rarement", "Jamais"],
-        type: 3, // 3 pourrait représenter une échelle de notation
+        type: 3,
         owner: userBob._id,
         date: new Date()
     }
@@ -68,8 +66,6 @@ db.questions.insert([
 const questionA = db.questions.findOne({ title: "Un couscous contient des merguez." });
 const questionB = db.questions.findOne({ title: "Quelle est votre plat préféré ?" });
 const questionC = db.questions.findOne({ title: "À quelle fréquence faites-vous du sport ?" });
-
-
 
 db.surveys.insert([
     {

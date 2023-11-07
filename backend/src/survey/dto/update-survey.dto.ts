@@ -1,5 +1,5 @@
-import { IsNotEmpty, IsString, IsOptional, IsArray, IsDate } from 'class-validator';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdateSurveyDto {
     @ApiPropertyOptional({
